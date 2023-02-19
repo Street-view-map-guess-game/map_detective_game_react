@@ -5,8 +5,8 @@ import Map from "../components/MiniMap";
 function GamePage() {
   return (
     <div>
-      <StreetView></StreetView>
       <Map></Map>
+      <StreetView></StreetView>
     </div>
   );
 }

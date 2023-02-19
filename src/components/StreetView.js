@@ -42,7 +42,7 @@ function StreetView() {
     });
   };
   const containerStyle = {
-    width: "99vw",
+    width: "100vw",
     height: "100vh",
   };
 
