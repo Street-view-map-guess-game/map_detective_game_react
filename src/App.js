@@ -1,14 +1,8 @@
 import "./App.css";
-import StreetView from "./components/StreetView";
-import MiniMap from "./components/MiniMap";
+import GamePage from "./pages/GamePage";
 
 function App() {
-  return (
-    <div>
-      <StreetView></StreetView>
-      <MiniMap></MiniMap>
-    </div>
-  );
+  return <GamePage></GamePage>;
 }
 
 export default App;
