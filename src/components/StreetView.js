@@ -1,42 +1,50 @@
 import React, { useEffect, useState } from "react";
-import ReactStreetview from "react-streetview";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
-
+import { GoogleMap, StreetViewPanorama, useJsApiLoader } from '@react-google-maps/api';
 function StreetView() {
+  const [map, setMap] = useState(null);
+  const [panorama, setPanorama] = useState(null);
   const [coordinates, setCoordinates] = useState({});
-  const apikey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
   useEffect(() => {
     var data = getRandomCoordinate();
     setCoordinates(data);
+    console.log(data);
   }, []);
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A',
+  });
 
-  const streetViewPanoramaOptions = {
-    disableDefaultUI: true,
-    showRoadLabels: false,
-    position: {
-      lat: coordinates.randomSmallAreaLat,
-      lng: coordinates.randomSmallAreaLng,
-    },
-    pov: { heading: 100, pitch: 0 },
-    zoom: 1,
+  console.log("street view " + isLoaded)
+  const onLoad = (map) => {
+    setMap(map);
   };
 
-  return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        position: "absolute",
-        zIndex: -1,
-        backgroundColor: "#eeeeee",
-      }}>
-      <ReactStreetview
-        apiKey={apikey}
-        streetViewPanoramaOptions={streetViewPanoramaOptions}
-      />
-    </div>
-  );
+  const onUnmount = () => {
+    setMap(null);
+    setPanorama(null);
+  };
+
+  const onStreetViewLoad = (panorama) => {
+    setPanorama(panorama);
+  };
+  const containerStyle = {
+    width: "100vw",
+    height: "100vh",
+  };
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={coordinates}
+      zoom={15}
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+    >
+      <StreetViewPanorama onLoad={onStreetViewLoad} visible={true} position={coordinates} />
+    </GoogleMap>
+  ) : <></>;
 }
 
 export default StreetView;

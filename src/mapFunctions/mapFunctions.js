@@ -28,7 +28,7 @@ export const getRandomCoordinate = () => {
   randomSmallAreaLng = getRandomNumber(minlng, maxlng);
 
   return {
-    randomSmallAreaLat: randomSmallAreaLat,
-    randomSmallAreaLng: randomSmallAreaLng,
+    lat: randomSmallAreaLat,
+    lng: randomSmallAreaLng,
   };
 };
