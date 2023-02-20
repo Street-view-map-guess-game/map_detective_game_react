@@ -15,14 +15,15 @@ function StreetView() {
   const [panorama, setPanorama] = useState(null);
   const [coordinates, setCoordinates] = useState({});
   const dispatch = useDispatch();
-  const[show,setshow] = useState(null)
-  const [ignored,forceUpdate] =useReducer(x => x + 1 , 0)
+  const [show, setshow] = useState(null)
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
 
 
   useEffect(() => {
     var data = getRandomCoordinate();
     dispatch(storeCoordinate(data));
     setCoordinates(data);
+    console.log(data);
   }, [ignored]);
 
   const { isLoaded } = useJsApiLoader({
@@ -39,10 +40,9 @@ function StreetView() {
     setPanorama(null);
   };
 
-  const showui = ( ) => {
+  const showui = () => {
     setshow(true)
-    console.log(show)
-    
+
   }
 
   const onStreetViewLoad = (panorama) => {
@@ -59,15 +59,18 @@ function StreetView() {
             setshow("selam")
             showui()
             resolve();
+            console.log(panorama);
+            console.log(panorama.getPosition());
             console.log("basarili")
             console.log(show)
             
 
-         
+
+
           } else {
             setTimeout(checkDataProviders, 1000);
-          console.log("basarisiz")
-          console.log(show)
+            console.log("basarisiz")
+            console.log(show)
             forceUpdate()
 
           }
@@ -75,12 +78,12 @@ function StreetView() {
         checkDataProviders();
       });
     };
-  
+
     waitForDataProviders().then(() => {
       console.log(panorama.streetViewDataProviders);
     });
 
-    
+
 
   };
   const containerStyle = {
@@ -92,8 +95,8 @@ function StreetView() {
     disableDefaultUI: true,
     showRoadLabels: false,
   };
-//© 2023 Google
-  return   isLoaded   ? ( 
+
+  return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={coordinates}
@@ -109,7 +112,7 @@ function StreetView() {
     </GoogleMap>
   ) : (
     <></>
-  ) 
+  )
 }
 
 export default StreetView;
