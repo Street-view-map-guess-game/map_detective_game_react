@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 import { useDispatch } from "react-redux";
 import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
+import { useReducer } from "react";
 
 import {
   GoogleMap,
@@ -14,13 +15,15 @@ function StreetView() {
   const [panorama, setPanorama] = useState(null);
   const [coordinates, setCoordinates] = useState({});
   const dispatch = useDispatch();
+  const[show,setshow] = useState(null)
+  const [ignored,forceUpdate] =useReducer(x => x + 1 , 0)
 
 
   useEffect(() => {
     var data = getRandomCoordinate();
     dispatch(storeCoordinate(data));
     setCoordinates(data);
-  }, []);
+  }, [ignored]);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -36,6 +39,12 @@ function StreetView() {
     setPanorama(null);
   };
 
+  const showui = ( ) => {
+    setshow(true)
+    console.log(show)
+    
+  }
+
   const onStreetViewLoad = (panorama) => {
     setPanorama(panorama);
     panorama.setOptions({
@@ -45,10 +54,22 @@ function StreetView() {
     const waitForDataProviders = () => {
       return new Promise((resolve) => {
         const checkDataProviders = () => {
-          if (panorama.streetViewDataProviders !== undefined) {
+          const regex = /Google/;
+          if (regex.test(panorama.streetViewDataProviders)) {
+            setshow("selam")
+            showui()
             resolve();
+            console.log("basarili")
+            console.log(show)
+            
+
+         
           } else {
             setTimeout(checkDataProviders, 1000);
+          console.log("basarisiz")
+          console.log(show)
+            forceUpdate()
+
           }
         };
         checkDataProviders();
@@ -71,8 +92,8 @@ function StreetView() {
     disableDefaultUI: true,
     showRoadLabels: false,
   };
-
-  return isLoaded ? (
+//© 2023 Google
+  return   isLoaded   ? ( 
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={coordinates}
@@ -88,7 +109,7 @@ function StreetView() {
     </GoogleMap>
   ) : (
     <></>
-  );
+  ) 
 }
 
 export default StreetView;
