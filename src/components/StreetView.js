@@ -9,11 +9,12 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 function StreetView() {
+
   const [map, setMap] = useState(null);
   const [panorama, setPanorama] = useState(null);
   const [coordinates, setCoordinates] = useState({});
-
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     var data = getRandomCoordinate();
@@ -40,6 +41,26 @@ function StreetView() {
     panorama.setOptions({
       enableCloseButton: false,
     });
+
+    const waitForDataProviders = () => {
+      return new Promise((resolve) => {
+        const checkDataProviders = () => {
+          if (panorama.streetViewDataProviders !== undefined) {
+            resolve();
+          } else {
+            setTimeout(checkDataProviders, 1000);
+          }
+        };
+        checkDataProviders();
+      });
+    };
+  
+    waitForDataProviders().then(() => {
+      console.log(panorama.streetViewDataProviders);
+    });
+
+    
+
   };
   const containerStyle = {
     width: "100vw",
