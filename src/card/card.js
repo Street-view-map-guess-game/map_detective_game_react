@@ -12,7 +12,7 @@ const Card = ({ title, imageUrl, imageAlt, description, countryName }) => {
                     <div className="mt-4">
                         <Link to={{
                             pathname: '/gamescreen',
-                            state: { gameId: { countryName } }
+                            state: { countryName: { countryName } }
                         }}>
                             <button className="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded">
                                 Start Game

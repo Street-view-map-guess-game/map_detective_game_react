@@ -9,6 +9,7 @@ import {
   StreetViewPanorama,
   useJsApiLoader,
 } from "@react-google-maps/api";
+
 function StreetView() {
 
   const [map, setMap] = useState(null);
@@ -17,7 +18,6 @@ function StreetView() {
   const dispatch = useDispatch();
   const [show, setshow] = useState(null)
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
-
 
   useEffect(() => {
     var data = getRandomCoordinate();
@@ -63,7 +63,7 @@ function StreetView() {
             console.log(panorama.getPosition());
             console.log("basarili")
             console.log(show)
-            
+
 
 
 
@@ -82,8 +82,6 @@ function StreetView() {
     waitForDataProviders().then(() => {
       console.log(panorama.streetViewDataProviders);
     });
-
-
 
   };
   const containerStyle = {

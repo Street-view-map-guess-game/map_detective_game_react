@@ -1,7 +1,7 @@
 import "./App.css";
 import GamePage from "./pages/GamePage";
 import CountrySelectionPage from "./pages/CountrySelectionPage";
-import { BrowserRouter, Switch, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 function App() {

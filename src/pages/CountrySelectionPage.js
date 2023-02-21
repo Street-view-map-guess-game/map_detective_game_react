@@ -20,8 +20,6 @@ function CountrySelectionPage() {
                     countryName="france"
                 />
             </div>
-
-
         </div>
     );
 }
