@@ -1,20 +1,19 @@
 import "./App.css";
 import GamePage from "./pages/GamePage";
 import CountrySelectionPage from "./pages/CountrySelectionPage";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Routes } from 'react-router-dom';
 
 
 function App() {
   return (
+
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <CountrySelectionPage />
+      <Routes>
+        <Route exact path="/" element={<CountrySelectionPage />} >
+
         </Route>
-        <Route path="/game">
-          <GamePage />
-        </Route>
-      </Switch>
+        <Route path="/gamescreen" element={<GamePage />} />
+      </Routes>
     </BrowserRouter>
   );
 }

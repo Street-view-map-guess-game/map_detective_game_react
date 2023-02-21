@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 function CountrySelectionPage() {
     return (
         <div>
             <h1>Hoş Geldiniz</h1>
-            <Link to="/game">Oyuna Başla</Link>
+            <Link to="/gamescreen">Oyuna Başla</Link>
+            <Outlet />
         </div>
     );
 }
