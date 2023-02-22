@@ -1,26 +1,31 @@
 import { Link, Outlet } from 'react-router-dom';
 import Card from '../card/card';
 
+import maiden_tower from "../assets/images/maiden's_tower(turkey).jpg";
+
 function CountrySelectionPage() {
     return (
-        <div>
-            <div className="flex space-x-6">
-                <Card
-                    title="TURKEY"
-                    imageUrl="https://upload.wikimedia.org/wikipedia/commons/0/01/K%C4%B1z_Kulesi_February_2013_01.jpg"
-                    imageAlt="Maiden's Tower"
-                    description="Turkey is great country bla bla..."
-                    countryName="turkey"
-                />
-                <Card
-                    title="FRANCE"
-                    imageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/640px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg"
-                    imageAlt="Eiffel Tower"
-                    description="FRANCE is great country bla bla..."
-                    countryName="france"
-                />
+        <div className="flex justify-center items-center">
+            <div>
+                <div className="flex space-x-6">
+                    <Card
+                        title="TURKEY"
+                        imageUrl={maiden_tower}
+                        imageAlt="Maiden's Tower"
+                        description="Turkey is great country bla bla..."
+                        countryName="turkey"
+                    />
+                    <Card
+                        title="FRANCE"
+                        imageUrl="https://i.natgeofe.com/k/6d4021bf-832e-49f6-b898-27b7fcd7cbf7/eiffel-tower-ground-up_2x1.jpg"
+                        imageAlt="Eiffel Tower"
+                        description="FRANCE is great country bla bla..."
+                        countryName="france"
+                    />
+                </div>
             </div>
         </div>
+
     );
 }
 

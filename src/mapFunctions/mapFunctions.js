@@ -1,10 +1,5 @@
 import allcoordinates from "../allCoordinates/coordinates.json";
 
-console.log(allcoordinates.turkeycoordinates);
-
-console.log(allcoordinates.francecoordinates)
-
-
 // ülke adı butonlarla gelecek
 var countryName = "turkeycoordinates";
 
