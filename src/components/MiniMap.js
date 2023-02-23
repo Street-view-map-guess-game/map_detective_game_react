@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+//import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 
-function Map() {
-  const data = useSelector((state) => state.mapSlc.coordinate);
-  const [guess, setGuess] = useState({ lat: "", lng: "" });
+import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 
+import 'leaflet/dist/leaflet.css'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+import "leaflet-defaulticon-compatibility";
+
+function Map() {
   const [containerStyle, setContainerStyle] = useState({
     height: "200px",
     width: "300px",
@@ -13,26 +16,11 @@ function Map() {
     borderRadius: "10px",
     transition: "0.4s",
   });
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A",
-  });
 
-  const options = {
-    disableDefaultUI: true,
-  };
 
-  const onLoad = (marker) => {
-    console.log("marker: ", marker);
-  };
+  
 
-  const center = {
-    lat: guess.lat != "" ? guess.lat : -25.363,
-    lng: guess.lng != "" ? guess.lng : 131.044,
-  };
-  console.log(guess);
-
-  return isLoaded ? (
+  return (
     <div
       style={{
         position: "absolute",
@@ -44,16 +32,12 @@ function Map() {
         justifyContent: "center",
         alignContent: "center",
       }}>
-      <GoogleMap
-        onClick={(e) => {
-          const lat = e.latLng.lat();
-          const lng = e.latLng.lng();
-          setGuess({ ...guess, lat: lat, lng: lng });
-        }}
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={3}
-        options={options}
+      <MapContainer
+        center={[39.92077, 32.85411]}
+        zoom={5}
+        scrollWheelZoom={true}
+        style={containerStyle}
+        zoomControl={false}
         onMouseOver={() => {
           setContainerStyle({
             ...containerStyle,
@@ -67,41 +51,11 @@ function Map() {
             width: "250px",
             height: "150px",
           });
-        }}>
-        {guess.lat == "" || guess.lng == "" ? (
-          ""
-        ) : (
-          <Marker onLoad={onLoad} position={center} title="your guess"></Marker>
-        )}
-      </GoogleMap>
-      <button
-        style={
-          guess.lat == "" || guess.lng == ""
-            ? {
-                background: "rgba(0,0,0,.30)",
-                borderRadius: "10px",
-                height: "30px",
-                color: "rgba(200,200,200,0.7)",
-                fontWeight: "bolder",
-                marginTop: "10px",
-                transition: "0.4s",
-                cursor: "not-allowed",
-              }
-            : {
-                background: "#37f725",
-                borderRadius: "10px",
-                height: "30px",
-                color: "rgba(255,255,255,1)",
-                fontWeight: "bolder",
-                marginTop: "10px",
-                transition: "0.4s",
-              }
-        }>
-        Complete your guess!
-      </button>
+        }}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      </MapContainer>
     </div>
-  ) : (
-    <></>
   );
 }
 
