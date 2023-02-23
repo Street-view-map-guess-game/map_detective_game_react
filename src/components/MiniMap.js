@@ -2,11 +2,9 @@ import React, { useState } from "react";
 //import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 
-import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, useMapEvents, Marker, Popup } from 'react-leaflet';
 
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
-import "leaflet-defaulticon-compatibility";
+import "leaflet/dist/leaflet.css";
 
 function Map() {
   const [containerStyle, setContainerStyle] = useState({
@@ -17,8 +15,6 @@ function Map() {
     transition: "0.4s",
   });
 
-
-  
 
   return (
     <div
@@ -54,6 +50,17 @@ function Map() {
         }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        (
+        <Marker
+          position={[50.5, 30.5]}
+          eventHandlers={{
+            click: (e) => {
+              console.log('marker clicked', e)
+            },
+          }} >
+          <Popup>You clicked here</Popup>
+        </Marker>
+        )
       </MapContainer>
     </div>
   );
