@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { setScore } from "../gameFunctions/gameFunctions";
 import styles from "../styles/mapStyle.module.css";
+import { Polyline } from "react-leaflet";
 
 import {
   MapContainer,
@@ -14,18 +15,12 @@ import {
 import L from "leaflet";
 
 import "leaflet/dist/leaflet.css";
+import { findDistance } from "../mapFunctions/mapFunctions";
 
 function Map() {
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [guess, setGuess] = useState({ lat: "", lng: "" });
-
-  const [containerStyle, setContainerStyle] = useState({
-    height: "200px",
-    width: "300px",
-    cursor: "default",
-    borderRadius: "10px",
-    transition: "0.4s",
-  });
+  const [isGuessed, setGuessed] = useState(false);
 
   const icon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
@@ -36,23 +31,32 @@ function Map() {
     if (guess.lat === "" || guess.lng === "") {
       alert("Lütfen tahmin yapın");
     } else {
-      const score = setScore();
+      const distance = findDistance(data, guess);
+      const score = setScore(distance);
+      console.log(score);
+      setGuessed(true);
     }
   };
 
   const center = {
-    lat: guess.lat != "" ? guess.lat : 38.9637,
-    lng: guess.lng != "" ? guess.lng : 35.2433,
+    lat: guess.lat !== "" ? guess.lat : 38.9637,
+    lng: guess.lng !== "" ? guess.lng : 35.2433,
+  };
+
+  const pathOptions = {
+    color: "black",
+    weight: "1",
+    dashArray: "5, 5",
+    dashOffset: "8",
   };
 
   function MapEvents() {
     useMapEvents({
       click: (e) => {
-        setGuess(e.latlng);
-        console.log(guess);
-      },
-      onMouseOver: () => {
-        console.log("Geldi");
+        if (!isGuessed) {
+          setGuess(e.latlng);
+          console.log(guess);
+        }
       },
     });
     return null;
@@ -71,8 +75,25 @@ function Map() {
           ""
         ) : (
           <Marker position={guess} icon={icon}>
-            <Popup>Tahmininiz</Popup>
+            <Popup>Your Guess</Popup>
           </Marker>
+        )}
+        {isGuessed ? (
+          <Polyline
+            pathOptions={pathOptions}
+            positions={[
+              [data.lat, data.lng],
+              [guess.lat, guess.lng],
+            ]}></Polyline>
+        ) : (
+          ""
+        )}
+        {isGuessed ? (
+          <Marker position={data} icon={icon}>
+            <Popup>Real Coordinate</Popup>
+          </Marker>
+        ) : (
+          ""
         )}
         <MapEvents></MapEvents>
       </MapContainer>
@@ -83,7 +104,7 @@ function Map() {
             ? styles.buttonNoGuess
             : styles.buttonGuess
         }>
-        Complete your guess!
+        {isGuessed ? "New Coordinate" : "Complete your guess!"}
       </button>
     </div>
   );

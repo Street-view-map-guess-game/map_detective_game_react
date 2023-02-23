@@ -1,15 +1,14 @@
 import allcoordinates from "../allCoordinates/coordinates.json";
+import { point, distance } from "@turf/turf";
 
 // koordinat random
 function getRandomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-
 export const getRandomCoordinate = ({ countryName }) => {
-
   // url kısmından ülke ismi alıyor
-  var coordinates = allcoordinates[countryName+"coordinates"];
+  var coordinates = allcoordinates[countryName + "coordinates"];
   var randomSmallAreaLat, randomSmallAreaLng;
 
   //bölgelerden birini seçiyor
@@ -29,4 +28,14 @@ export const getRandomCoordinate = ({ countryName }) => {
     lat: randomSmallAreaLat,
     lng: randomSmallAreaLng,
   };
+};
+
+export const findDistance = (pointOne, pointTwo) => {
+  var from = point([pointOne.lat, pointOne.lng]);
+  var to = point([pointTwo.lat, pointTwo.lng]);
+  var options = { units: "kilometers" };
+
+  var pointDistance = distance(from, to, options);
+
+  return pointDistance;
 };
