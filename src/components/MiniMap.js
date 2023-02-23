@@ -1,33 +1,24 @@
 import React, { useState } from "react";
-//import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
+import { setScore } from "../gameFunctions/gameFunctions";
+import styles from "../styles/mapStyle.module.css";
 
-import { MapContainer, TileLayer, useMapEvents, Marker, Popup } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  useMapEvents,
+  Marker,
+  Popup,
+} from "react-leaflet";
 
 import L from "leaflet";
 
 import "leaflet/dist/leaflet.css";
 
-function AddMarkerOnClick() {
-  const [position, setPosition] = useState(null);
-  useMapEvents({
-    click(e) {
-      setPosition(e.latlng);
-    },
-  });
-  const icon = L.icon({
-    iconUrl: 'https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png',
-    iconAnchor: [12, 41], // adjust the anchor point to position the icon above the clicked location
-  });
-
-  return position === null ? null : (
-    <Marker position={position} icon={icon}>
-      <Popup >You clicked here!</Popup>
-    </Marker>
-  );
-}
-
 function Map() {
+  const data = useSelector((state) => state.mapSlc.coordinate);
+  const [guess, setGuess] = useState({ lat: "", lng: "" });
+
   const [containerStyle, setContainerStyle] = useState({
     height: "200px",
     width: "300px",
@@ -36,44 +27,64 @@ function Map() {
     transition: "0.4s",
   });
 
+  const icon = L.icon({
+    iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
+    iconAnchor: [12, 41], // adjust the anchor point to position the icon above the clicked location
+  });
+
+  const calculateDistanceNScore = () => {
+    if (guess.lat === "" || guess.lng === "") {
+      alert("Lütfen tahmin yapın");
+    } else {
+      const score = setScore();
+    }
+  };
+
+  const center = {
+    lat: guess.lat != "" ? guess.lat : 38.9637,
+    lng: guess.lng != "" ? guess.lng : 35.2433,
+  };
+
+  function MapEvents() {
+    useMapEvents({
+      click: (e) => {
+        setGuess(e.latlng);
+        console.log(guess);
+      },
+      onMouseOver: () => {
+        console.log("Geldi");
+      },
+    });
+    return null;
+  }
+
   return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: 1000,
-        right: 10,
-        bottom: 30,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignContent: "center",
-      }}
-      onMouseOver={() => {
-        setContainerStyle({
-          ...containerStyle,
-          width: "450px",
-          height: "300px",
-        });
-      }}
-      onMouseOut={() => {
-        setContainerStyle({
-          ...containerStyle,
-          width: "250px",
-          height: "150px",
-        });
-      }}>
+    <div className={styles.mainContainer}>
       <MapContainer
-        center={[39.92077, 32.85411]}
-        zoom={5}
+        className={styles.mapContainer}
+        center={center}
+        zoom={4}
         scrollWheelZoom={true}
-        style={containerStyle}
-        zoomControl={false}
-      >
+        zoomControl={false}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        (
-        <AddMarkerOnClick />
-        )
+        {guess.lat === "" || guess.lng === "" ? (
+          ""
+        ) : (
+          <Marker position={guess} icon={icon}>
+            <Popup>Tahmininiz</Popup>
+          </Marker>
+        )}
+        <MapEvents></MapEvents>
       </MapContainer>
+      <button
+        onClick={calculateDistanceNScore}
+        className={
+          guess.lat === "" || guess.lng === ""
+            ? styles.buttonNoGuess
+            : styles.buttonGuess
+        }>
+        Complete your guess!
+      </button>
     </div>
   );
 }

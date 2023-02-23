@@ -11,29 +11,24 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 
-function StreetView({countryName}) {
-
+function StreetView({ countryName }) {
   const [map, setMap] = useState(null);
   const [panorama, setPanorama] = useState(null);
   const [coordinates, setCoordinates] = useState({});
   const dispatch = useDispatch();
-  const [show, setshow] = useState(null)
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
+  const [show, setshow] = useState(null);
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
-
-    var data = getRandomCoordinate({countryName});
+    var data = getRandomCoordinate({ countryName });
     dispatch(storeCoordinate(data));
     setCoordinates(data);
-  
-    
   }, []);
 
-  const  {isLoaded}  = useJsApiLoader({
+  const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A",
   });
-  
 
   const onLoad = (map) => {
     setMap(map);
@@ -45,16 +40,14 @@ function StreetView({countryName}) {
   };
 
   const showui = () => {
-    setshow(true)
+    setshow(true);
+  };
 
-  }
-
-  const refreshcordinate = ( ) => {
-    var data = getRandomCoordinate({countryName});
+  const refreshcordinate = () => {
+    var data = getRandomCoordinate({ countryName });
     dispatch(storeCoordinate(data));
     setCoordinates(data);
-    
-  }
+  };
 
   const onStreetViewLoad = (panorama) => {
     setPanorama(panorama);
@@ -67,31 +60,18 @@ function StreetView({countryName}) {
         const checkDataProviders = () => {
           const regex = /Google/;
           if (regex.test(panorama.streetViewDataProviders)) {
-            
             resolve();
-            console.log(panorama);
-            console.log(panorama.getPosition());
-            console.log("basarili")
-            console.log(coordinates)
-            
-
           } else {
             setTimeout(checkDataProviders, 1000);
-            console.log("basarisiz")
-            refreshcordinate()
-            console.log(show)
+            refreshcordinate();
             // forceUpdate()
-
           }
         };
         checkDataProviders();
       });
     };
 
-    waitForDataProviders().then(() => {
-      console.log(panorama.streetViewDataProviders);
-    });
-
+    waitForDataProviders().then(() => {});
   };
   const containerStyle = {
     width: "100vw",
@@ -118,8 +98,8 @@ function StreetView({countryName}) {
       />
     </GoogleMap>
   ) : (
-  <Loadingpage />
-  )
+    <Loadingpage />
+  );
 }
 
 export default StreetView;

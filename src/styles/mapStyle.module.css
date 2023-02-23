@@ -1,0 +1,44 @@
+.mapContainer {
+  height: 200px;
+  width: 300px;
+  cursor: default;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+.mapContainer:hover {
+  height: 300px;
+  width: 500px;
+}
+
+.mainContainer {
+  position: absolute;
+  z-index: 1000;
+  right: 10px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.buttonNoGuess {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 30px;
+  color: rgba(200, 200, 200, 0.7);
+  font-weight: bolder;
+  margin-top: 10px;
+  transition: 0.4s;
+  cursor: not-allowed;
+}
+
+.buttonGuess {
+  background: #37f725;
+  border-radius: 10px;
+  height: 30px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: bolder;
+  margin-top: 10px;
+  transition: 0.4s;
+}
