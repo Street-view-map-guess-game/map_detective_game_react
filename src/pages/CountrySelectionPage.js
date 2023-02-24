@@ -3,8 +3,8 @@ import Header from "../components/Header";
 
 
 import maiden_tower from "../assets/images/countryImage/maiden's_tower(turkey).jpg";
-import la_sagrada_familia from "../assets/images/countryImage/La_Sagrada_Familia(spain).jpg"
-import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpeg"
+import la_sagrada_familia from "../assets/images/countryImage/(spain).jpg"
+import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpg"
 import pisa_tower from "../assets/images/countryImage/pisa_tower(italy).jpg"
 
 
