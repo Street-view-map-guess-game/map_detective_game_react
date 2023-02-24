@@ -1,7 +1,12 @@
 import Card from "../card/card";
+import Header from "../components/Header";
+
 
 import maiden_tower from "../assets/images/countryImage/maiden's_tower(turkey).jpg";
-import Header from "../components/Header";
+import la_sagrada_familia from "../assets/images/countryImage/La_Sagrada_Familia(spain).jpg"
+import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpeg"
+import pisa_tower from "../assets/images/countryImage/pisa_tower(italy).jpg"
+
 
 function CountrySelectionPage() {
   return (
@@ -17,10 +22,24 @@ function CountrySelectionPage() {
         />
         <Card
           title="FRANCE"
-          imageUrl="https://i.natgeofe.com/k/6d4021bf-832e-49f6-b898-27b7fcd7cbf7/eiffel-tower-ground-up_2x1.jpg"
+          imageUrl={eiffel_tower}
           imageAlt="Eiffel Tower"
           description="Continue with FRANCE"
           countryName="france"
+        />
+        <Card
+          title="SPAIN"
+          imageUrl={la_sagrada_familia}
+          imageAlt="La Sagrada Familia"
+          description="Continue with SPAIN"
+          countryName="spain"
+        />
+        <Card
+          title="ITALY"
+          imageUrl={pisa_tower}
+          imageAlt="Pisa Tower"
+          description="Continue with ITALY"
+          countryName="italy"
         />
       </div>
     </div>
