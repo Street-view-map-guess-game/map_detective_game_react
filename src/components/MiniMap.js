@@ -23,7 +23,7 @@ function Map() {
   const [isGuessed, setGuessed] = useState(false);
 
   // Dünya sınırları için
-  const wolrdBounds = [[-90, -180], [90, 148]];
+  const wolrdBounds = [[-90, -180], [90, 180]];
 
   const icon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
