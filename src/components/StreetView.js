@@ -21,7 +21,7 @@ function StreetView({ countryName }) {
   const refreshcordinate = () => {
     const data = getRandomCoordinate({ countryName });
     setQuestCoor(data);
-    dispatch(storeCoordinate(data));
+
     setCoordinates(data);
     const sv = new window.google.maps.StreetViewService();
     sv.getPanorama({ location: data, radius: 50000 }, processSVData);
@@ -48,6 +48,7 @@ function StreetView({ countryName }) {
           showRoadLabels: false,
         });
         console.log(data.location.latLng.lat(), data.location.latLng.lng());
+        dispatch(storeCoordinate({ lat: data.location.latLng.lat(), lng: data.location.latLng.lng() }));
 
       } else {
         // sokak görünümü yoksa tekrardan çağır
