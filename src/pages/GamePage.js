@@ -3,6 +3,7 @@ import StreetView from "../components/StreetView";
 import Map from "../components/MiniMap";
 import { useParams } from "react-router-dom";
 import allcoordinates from "../allCoordinates/coordinates.json";
+import NotFound from "./NotFound";
 
 function GamePage() {
   const { countryName } = useParams();
@@ -16,14 +17,13 @@ function GamePage() {
     );
   } else {
     //buraya sayfa mevcut değil sayfası gelecek
-    
+
     return (
       <div>
-        PAGE IS NOT AVAILABLE
+        <NotFound></NotFound>
       </div>
     );
   }
-
 }
 
 export default GamePage;

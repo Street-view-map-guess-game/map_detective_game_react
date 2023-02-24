@@ -4,12 +4,13 @@ import { useDispatch } from "react-redux";
 import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import Loadingpage from "../pages/loadingPage";
 
-import { GoogleApiWrapper } from 'google-maps-react';
+import { GoogleApiWrapper } from "google-maps-react";
 
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
 function StreetView({ countryName }) {
   const [coordinates, setCoordinates] = useState({});
+  const [isLoaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   const [questCoor, setQuestCoor] = useState({ lat: 0, lng: 0 });
@@ -29,8 +30,9 @@ function StreetView({ countryName }) {
 
   const processSVData = (data, status) => {
     // sokak görünümü varsa
-    if (status === 'OK') {
+    if (status === "OK") {
       console.log(data);
+
       // Yalnızca Google in yüklemiş olduğu sokak görünümlerini filtreler
       const regex = /Google/;
       if (regex.test(data.copyright)) {
@@ -38,18 +40,24 @@ function StreetView({ countryName }) {
 
         // sokak görünümü için tanımlamalar
         const panorama = new window.google.maps.StreetViewPanorama(
-          document.getElementById('pano'), {
-          position: data.location.latLng,
-          pov: {
-            heading: 34,
-            pitch: 10
-          },
-          disableDefaultUI: true,
-          showRoadLabels: false,
-        });
+          document.getElementById("pano"),
+          {
+            position: data.location.latLng,
+            pov: {
+              heading: 34,
+              pitch: 10,
+            },
+            disableDefaultUI: true,
+            showRoadLabels: false,
+          }
+        );
         console.log(data.location.latLng.lat(), data.location.latLng.lng());
-        dispatch(storeCoordinate({ lat: data.location.latLng.lat(), lng: data.location.latLng.lng() }));
-
+        dispatch(
+          storeCoordinate({
+            lat: data.location.latLng.lat(),
+            lng: data.location.latLng.lng(),
+          })
+        );
       } else {
         // sokak görünümü yoksa tekrardan çağır
         refreshcordinate();
@@ -61,15 +69,16 @@ function StreetView({ countryName }) {
   };
 
   return (
-    <div id="pano" style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      height: '100%',
-      width: '100%'
-    }}></div>
+    <div
+      id="pano"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        height: "100%",
+        width: "100%",
+      }}></div>
   );
-
 }
 
 export default GoogleApiWrapper({
