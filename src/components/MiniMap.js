@@ -22,6 +22,9 @@ function Map() {
   const [guess, setGuess] = useState({ lat: "", lng: "" });
   const [isGuessed, setGuessed] = useState(false);
 
+  // Dünya sınırları için
+  const wolrdBounds = [[-90, -180], [90, 148]];
+
   const icon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
     iconAnchor: [12, 41], // adjust the anchor point to position the icon above the clicked location
@@ -67,10 +70,19 @@ function Map() {
       <MapContainer
         className={styles.mapContainer}
         center={center}
-        zoom={4}
+        zoom={5}
         scrollWheelZoom={true}
-        zoomControl={false}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        zoomControl={false}
+        maxBounds={wolrdBounds}
+        maxBoundsViscosity={1.0}
+        minZoom={3} 
+        maxZoom={8} 
+        
+      >
+        <TileLayer
+          noWrap={true}
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         {guess.lat === "" || guess.lng === "" ? (
           ""
         ) : (
