@@ -7,6 +7,10 @@ import NotFound from "./NotFound";
 
 function GamePage() {
   const { countryName } = useParams();
+  
+  useEffect(() => {
+    document.title = countryName.toUpperCase() + " - Map Detective";
+  }, []);
 
   if (allcoordinates.hasOwnProperty(countryName + "coordinates")) {
     return (
