@@ -75,7 +75,7 @@ function Map() {
         zoomControl={false}
         maxBounds={wolrdBounds}
         maxBoundsViscosity={1.0}
-        minZoom={3} 
+        minZoom={2} 
         maxZoom={8} 
         
       >
