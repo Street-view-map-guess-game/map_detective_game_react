@@ -8,6 +8,7 @@ import pisa_tower from "../assets/images/countryImage/pisa_tower(italy).jpg";
 import palacio_de_la_pena from "../assets/images/countryImage/palacio_de_la_pena(portugal).jpg";
 import buckingham_palace from "../assets/images/countryImage/buckingham-palace(england).jpg";
 import kiyomizu_dera_buddhist_temple from "../assets/images/countryImage/kiyomizu_dera_buddhist_temple(japan).jpeg";
+import earth from "../assets/images/countryImage/earth.jpg";
 
 function CountrySelectionPage() {
   return (
@@ -67,6 +68,13 @@ function CountrySelectionPage() {
             imageAlt="Kiyomizu Dera Buddhist Temple"
             description="Continue with JAPAN"
             countryName="japan"
+          />
+          <Card
+            title="WOLRD"
+            imageUrl={earth}
+            imageAlt="Earth"
+            description="Continue with WOLRD"
+            countryName="world"
           />
         </div>
       </div>

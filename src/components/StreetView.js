@@ -14,7 +14,7 @@ const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 function StreetView({ countryName }) {
 
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [streetViewIsLoaded, setStreetViewIsLoaded] = useState(false);
 
   useEffect(() => {
     refreshcordinate();
@@ -34,7 +34,7 @@ function StreetView({ countryName }) {
       const regex = /© \d+ Google/;
       if (regex.test(data.copyright)) {
         //sokak görünümü yüklendi
-        setIsLoaded(true);
+        setStreetViewIsLoaded(true);
 
         // sokak görünümü için tanımlamalar
         const panorama = new window.google.maps.StreetViewPanorama(
@@ -67,7 +67,7 @@ function StreetView({ countryName }) {
       height: '100%',
       width: '100%'
     }}>
-      {isLoaded ? null : <Loadingpage />}
+      {streetViewIsLoaded ? null : <Loadingpage />}
     </div>
   )
 }

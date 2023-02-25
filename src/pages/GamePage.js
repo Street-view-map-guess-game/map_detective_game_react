@@ -18,10 +18,30 @@ function GamePage() {
       </div>
     );
   } else {
-    document.title = "Page Is Not Available - Map Detective";
-    return (
-      <FailPages></FailPages>
-    );
+    if (countryName === "world") {
+      document.title = "WORLD - Map Detective";
+      const arrays = Object.values(allcoordinates);
+      const arrayCount = arrays.length;
+      const arrayNames = Object.keys(allcoordinates);
+
+      var randomCountry = Math.floor(Math.random() * arrayCount);
+      var arrayName = arrayNames[randomCountry].replace("coordinates", "");;
+
+      console.log(randomCountry, arrayName);
+
+      return (
+        <div>
+          <Map></Map>
+          <StreetView countryName={arrayName} />
+        </div>
+      );
+    }
+    else {
+      document.title = "Page Is Not Available - Map Detective";
+      return (
+        <FailPages></FailPages>
+      );
+    }
   }
 
 }
