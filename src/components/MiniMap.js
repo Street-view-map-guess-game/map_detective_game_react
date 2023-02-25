@@ -75,9 +75,9 @@ function Map() {
         zoomControl={false}
         maxBounds={wolrdBounds}
         maxBoundsViscosity={1.0}
-        minZoom={2} 
-        maxZoom={8} 
-        
+        minZoom={2}
+        maxZoom={8}
+
       >
         <TileLayer
           noWrap={true}

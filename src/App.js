@@ -2,7 +2,7 @@ import "./App.css";
 import GamePage from "./pages/GamePage";
 import CountrySelectionPage from "./pages/CountrySelectionPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NotFound from "./pages/NotFound";
+import Header from "./components/Header";
 
 function App() {
   return (

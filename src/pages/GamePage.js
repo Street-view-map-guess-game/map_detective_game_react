@@ -1,19 +1,15 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import StreetView from "../components/StreetView";
 import Map from "../components/MiniMap";
 import { useParams } from "react-router-dom";
 import allcoordinates from "../allCoordinates/coordinates.json";
-import NotFound from "./NotFound";
-
+import FailPages from "../pages/PageIsNotAvailable.js"
 
 function GamePage() {
   const { countryName } = useParams();
-  
-  useEffect(() => {
-    document.title = countryName.toUpperCase() + " - Map Detective";
-  }, []);
 
   if (allcoordinates.hasOwnProperty(countryName + "coordinates")) {
+    document.title = countryName.toUpperCase() + " - Map Detective";
     return (
       <div>
         <Map></Map>
@@ -21,14 +17,12 @@ function GamePage() {
       </div>
     );
   } else {
-    //buraya sayfa mevcut değil sayfası gelecek
-
+    document.title = "Page Is Not Available - Map Detective";
     return (
-      <div>
-        <NotFound></NotFound>
-      </div>
+      <FailPages></FailPages>
     );
   }
+
 }
 
 export default GamePage;

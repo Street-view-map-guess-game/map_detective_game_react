@@ -4,13 +4,11 @@
   cursor: default;
   border-radius: 10px;
   transition: 0.4s;
-  transition-delay: 1s;
 }
 
 .mapContainer:hover {
   height: 300px;
   width: 30rem;
-  transition-delay: 0s;
 }
 
 .mainContainer {

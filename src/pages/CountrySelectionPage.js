@@ -3,9 +3,11 @@ import Header from "../components/Header";
 
 
 import maiden_tower from "../assets/images/countryImage/maiden's_tower(turkey).jpg";
-import la_sagrada_familia from "../assets/images/countryImage/(spain).jpg"
-import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpg"
+import la_sagrada_familia from "../assets/images/countryImage/La_Sagrada_Familia(spain).jpg"
+import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpeg"
 import pisa_tower from "../assets/images/countryImage/pisa_tower(italy).jpg"
+import palacio_de_la_pena from "../assets/images/countryImage/palacio_de_la_pena(portugal).jpg"
+import buckingham_palace from "../assets/images/countryImage/buckingham-palace(england).jpg"
 
 
 function CountrySelectionPage() {
@@ -40,6 +42,20 @@ function CountrySelectionPage() {
           imageAlt="Pisa Tower"
           description="Continue with ITALY"
           countryName="italy"
+        />
+        <Card
+          title="PORTUGAL"
+          imageUrl={palacio_de_la_pena}
+          imageAlt="Palacio de la Pena"
+          description="Continue with PORTUGAL"
+          countryName="portugal"
+        />
+        <Card
+          title="UNITED KINGDOM"
+          imageUrl={buckingham_palace}
+          imageAlt="Buckingham Palace"
+          description="Continue with UNITED KINGDOM"
+          countryName="uk"
         />
       </div>
     </div>
