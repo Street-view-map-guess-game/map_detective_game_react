@@ -1,13 +1,13 @@
 import Card from "../card/card";
 import Header from "../components/Header";
 
-import Japan_Sakura_Fuji from "../assets/images/countryImage/Japan_Sakura_Fuji.jpg";
 import maiden_tower from "../assets/images/countryImage/maiden's_tower(turkey).jpg";
 import la_sagrada_familia from "../assets/images/countryImage/La_Sagrada_Familia(spain).jpg";
 import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpeg";
 import pisa_tower from "../assets/images/countryImage/pisa_tower(italy).jpg";
 import palacio_de_la_pena from "../assets/images/countryImage/palacio_de_la_pena(portugal).jpg";
 import buckingham_palace from "../assets/images/countryImage/buckingham-palace(england).jpg";
+import kiyomizu_dera_buddhist_temple from "../assets/images/countryImage/kiyomizu_dera_buddhist_temple(japan).jpeg";
 
 function CountrySelectionPage() {
   return (
@@ -63,8 +63,8 @@ function CountrySelectionPage() {
         <div className="flex  space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8">
           <Card
             title="JAPAN"
-            imageUrl={Japan_Sakura_Fuji}
-            imageAlt="Fuji mountain with sakura"
+            imageUrl={kiyomizu_dera_buddhist_temple}
+            imageAlt="Kiyomizu Dera Buddhist Temple"
             description="Continue with JAPAN"
             countryName="japan"
           />
