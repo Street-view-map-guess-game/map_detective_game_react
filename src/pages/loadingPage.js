@@ -6,7 +6,7 @@ import mapdetectivelogo from "../assets/images/pageImage/worldlogo.png"
 export default function Loadingpage() {
 
   return (
-    <div className="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-600 via-green-800 to-neutral-900 min-h-screen flex justify-center items-center" style={{
+    <div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex justify-center items-center" style={{
       width: "100%",
       height: "100%"
     }} >
