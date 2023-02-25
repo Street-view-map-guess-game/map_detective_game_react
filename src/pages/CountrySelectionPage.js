@@ -1,6 +1,7 @@
 import Card from "../card/card";
 import Header from "../components/Header";
 
+import Japan_Sakura_Fuji from "../assets/images/countryImage/Japan_Sakura_Fuji.jpg";
 import maiden_tower from "../assets/images/countryImage/maiden's_tower(turkey).jpg";
 import la_sagrada_familia from "../assets/images/countryImage/La_Sagrada_Familia(spain).jpg";
 import eiffel_tower from "../assets/images/countryImage/eiffel_tower(france).jpeg";
@@ -57,6 +58,15 @@ function CountrySelectionPage() {
             imageAlt="Buckingham Palace"
             description="Continue with UNITED KINGDOM"
             countryName="uk"
+          />
+        </div>
+        <div className="flex  space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8">
+          <Card
+            title="JAPAN"
+            imageUrl={Japan_Sakura_Fuji}
+            imageAlt="Fuji mountain with sakura"
+            description="Continue with JAPAN"
+            countryName="japan"
           />
         </div>
       </div>
