@@ -18,7 +18,6 @@ const Card = ({ title, imageUrl, imageAlt, description, countryName }) => {
               to={{
                 pathname: `/gamescreen/${countryName}`,
               }}>
-              {/* bg-transparent hover:bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-2 px-4 rounded border border-white */}
               <button className="bg-transparent hover:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 text-white font-bold py-2 px-4 rounded border border-white">
                 Start Game
               </button>

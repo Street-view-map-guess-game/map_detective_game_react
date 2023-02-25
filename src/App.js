@@ -1,7 +1,8 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import "./App.css";
 import GamePage from "./pages/GamePage";
 import CountrySelectionPage from "./pages/CountrySelectionPage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 import { useDispatch } from "react-redux";
+import { GoogleApiWrapper } from 'google-maps-react';
+
+
 import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import Loadingpage from "../pages/loadingPage";
+import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 
-import { GoogleApiWrapper } from 'google-maps-react';
+
 
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
 function StreetView({ countryName }) {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,9 +31,8 @@ function StreetView({ countryName }) {
     if (status === 'OK') {
 
       // Yalnızca Google in yüklemiş olduğu sokak görünümlerini filtreler
-      const regex = /Google/;
+      const regex = /© \d+ Google/;
       if (regex.test(data.copyright)) {
-
         //sokak görünümü yüklendi
         setIsLoaded(true);
 

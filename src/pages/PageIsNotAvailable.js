@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/404ErrorPageStyle.css"
 
+import "../styles/404ErrorPageStyle.css"
 
 function FailPage() {
     return (

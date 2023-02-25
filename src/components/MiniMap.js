@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { setScore } from "../gameFunctions/gameFunctions";
-import styles from "../styles/mapStyle.module.css";
 import { Polyline } from "react-leaflet";
-
 import {
   MapContainer,
   TileLayer,
@@ -11,11 +8,13 @@ import {
   Marker,
   Popup,
 } from "react-leaflet";
-
 import L from "leaflet";
 
-import "leaflet/dist/leaflet.css";
+import { setScore } from "../gameFunctions/gameFunctions";
+import styles from "../styles/mapStyle.module.css";
 import { findDistance } from "../mapFunctions/mapFunctions";
+
+import "leaflet/dist/leaflet.css";
 
 function Map() {
   const data = useSelector((state) => state.mapSlc.coordinate);
