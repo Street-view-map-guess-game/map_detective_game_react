@@ -10,7 +10,7 @@ import buckingham_palace from "../assets/images/countryImage/buckingham-palace(e
 
 function CountrySelectionPage() {
   return (
-    <div className="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-600 via-green-800 to-neutral-900 min-h-screen flex  justify-center items-center">
+    <div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex  justify-center items-center">
       <Header></Header>
       <div className="flex space-y-6 flex-col sm:space-x-0 sm:space-y-8 sm:pt-8 sm:pb-8 mt-32 mb-24 ">
         <div className="flex space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8 ">
