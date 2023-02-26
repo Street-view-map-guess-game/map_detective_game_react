@@ -4,9 +4,8 @@ import { GoogleApiWrapper } from 'google-maps-react';
 
 
 import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
-import Loadingpage from "../pages/LoadingPage";
+import Loadingpage from "../pages/loadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
-
 
 
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
@@ -30,6 +29,7 @@ function StreetView({ countryName }) {
     // sokak görünümü varsa
     if (status === 'OK') {
 
+
       // Yalnızca Google in yüklemiş olduğu sokak görünümlerini filtreler
       const regex = /© \d+ Google/;
       if (regex.test(data.copyright)) {
@@ -49,6 +49,26 @@ function StreetView({ countryName }) {
         });
         // koordinatın olduğu noktayı gönderir
         dispatch(storeCoordinate({ lat: data.location.latLng.lat(), lng: data.location.latLng.lng() }));
+
+        window.google.maps.event.addListenerOnce(panorama, 'status_changed', function () {
+
+          // tıklanabilir linkleri silen kod parçası
+          const links = document.querySelectorAll('a');
+          links.forEach(a => {
+            const linkregex = /https:\/\/maps.google.com\/maps\/@[0-9z,-.]+/;
+            const linkregex2 = /https:\/\/www.google.com\/maps\/@[0-9z,-.]+/;
+            if (linkregex.test(a.href) || linkregex2.test(a.href)) {
+              a.remove();
+            }
+          });
+
+          // adres info bugunu düzelten kod parçası
+          const addressInfo = document.querySelector('.gm-iv-address');
+          if (addressInfo) {
+            addressInfo.remove();
+          }
+        });
+
       } else {
         // sokak görünümü yoksa tekrardan çağır
         refreshcordinate();
