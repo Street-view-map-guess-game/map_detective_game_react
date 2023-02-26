@@ -4,7 +4,7 @@ import { GoogleApiWrapper } from 'google-maps-react';
 
 
 import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
-import Loadingpage from "../pages/loadingPage";
+import Loadingpage from "../pages/LoadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 
 
