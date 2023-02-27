@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import "font-awesome/css/font-awesome.min.css";
+
 function Compass({ panorama }) {
     const [heading, setHeading] = useState(panorama.getPov().heading);
     const [direction, setDirection] = useState("East");
@@ -28,8 +30,9 @@ function Compass({ panorama }) {
     const compassRotation = `rotate(${heading}deg)`;
 
     return (
-        <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 9999 }}>
-            <i className="fa fa-compass" style={{ fontSize: 40, transform: compassRotation }}>{direction}</i>
+        <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 9999, fontSize: 80 }}>
+            <i className="fa fa-compass" style={{ transform: compassRotation }}></i>
+            {direction}
         </div>
     );
 }
