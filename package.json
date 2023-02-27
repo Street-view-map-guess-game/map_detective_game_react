@@ -11,6 +11,7 @@
     "@turf/turf": "^6.5.0",
     "daisyui": "^2.51.0",
     "firebase": "^9.17.1",
+    "font-awesome": "^4.7.0",
     "google-maps-react": "^2.0.6",
     "leaflet": "^1.9.3",
     "leaflet-defaulticon-compatibility": "^0.1.1",
