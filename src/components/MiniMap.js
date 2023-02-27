@@ -20,6 +20,7 @@ function Map() {
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [guess, setGuess] = useState({ lat: "", lng: "" });
   const [isGuessed, setGuessed] = useState(false);
+  const [isRaundOver, setRaundOver] = useState(false);
 
   // Dünya sınırları için
   const wolrdBounds = [[-90, -180], [90, 180]];
@@ -62,6 +63,18 @@ function Map() {
       },
     });
     return null;
+  }
+
+  const generateNewCoordinate = () => {
+    // puanı depola
+
+
+    // sokak görünümünü yenile
+
+    // tahmin verilerini sıfırla
+    setGuess({ lat: "", lng: "" });
+    setGuessed(false);
+
   }
 
   return (
@@ -109,7 +122,7 @@ function Map() {
         <MapEvents></MapEvents>
       </MapContainer>
       <button
-        onClick={calculateDistanceNScore}
+        onClick={isGuessed ? generateNewCoordinate : calculateDistanceNScore}
         className={
           guess.lat === "" || guess.lng === ""
             ? styles.buttonNoGuess
