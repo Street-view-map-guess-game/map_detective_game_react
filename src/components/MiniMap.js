@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { restartCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import { Polyline } from "react-leaflet";
 import {
   MapContainer,
@@ -17,13 +18,17 @@ import { findDistance } from "../mapFunctions/mapFunctions";
 import "leaflet/dist/leaflet.css";
 
 function Map() {
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [guess, setGuess] = useState({ lat: "", lng: "" });
   const [isGuessed, setGuessed] = useState(false);
   const [isRaundOver, setRaundOver] = useState(false);
 
   // Dünya sınırları için
-  const wolrdBounds = [[-90, -180], [90, 180]];
+  const wolrdBounds = [
+    [-90, -180],
+    [90, 180],
+  ];
 
   const icon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
@@ -68,14 +73,12 @@ function Map() {
   const generateNewCoordinate = () => {
     // puanı depola
 
-
     // sokak görünümünü yenile
-
+    dispatch(restartCoordinate());
     // tahmin verilerini sıfırla
     setGuess({ lat: "", lng: "" });
     setGuessed(false);
-
-  }
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -88,9 +91,7 @@ function Map() {
         maxBounds={wolrdBounds}
         maxBoundsViscosity={1.0}
         minZoom={2}
-        maxZoom={8}
-
-      >
+        maxZoom={8}>
         <TileLayer
           noWrap={true}
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
