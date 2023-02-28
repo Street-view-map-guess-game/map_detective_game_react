@@ -63,10 +63,10 @@ function StreetView({ countryName }) {
           "status_changed",
           function () {
             //bunu anca settimeout ile yapabildim
-            // setTimeout(() => {
-            //   const developmentDiv = [...document.querySelectorAll('div')].find(el => el.textContent === 'For development purposes only');
-            //   developmentDiv.remove()
-            // }, 1000);
+            setTimeout(() => {
+              const developmentDiv = [...document.querySelectorAll('div')].find(el => el.textContent === 'For development purposes only');
+              developmentDiv.remove()
+            }, 1000);
 
             // tıklanabilir linkleri silen kod parçası
             const links = document.querySelectorAll("a");

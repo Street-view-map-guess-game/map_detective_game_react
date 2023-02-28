@@ -1,0 +1,14 @@
+.streetviewdiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.mapdiv {
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    right: 0;
+    border-top-left-radius: 25px;
+}

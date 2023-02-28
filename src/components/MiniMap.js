@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { restartCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import { Polyline } from "react-leaflet";
@@ -14,21 +14,34 @@ import L from "leaflet";
 import { setScore } from "../gameFunctions/gameFunctions";
 import styles from "../styles/mapStyle.module.css";
 import { findDistance } from "../mapFunctions/mapFunctions";
+import ResultPage from "../pages/ResultPage";
 
 import "leaflet/dist/leaflet.css";
+
 
 function Map() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [guess, setGuess] = useState({ lat: "", lng: "" });
   const [isGuessed, setGuessed] = useState(false);
-  const [isRaundOver, setRaundOver] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [numberOfRound, setnumberOfRound] = useState(0);
+  const [roundScore, setroundScore] = useState(0.0);
+  const [totalScore, settotalScore] = useState(0.0);
 
   // Dünya sınırları için
   const wolrdBounds = [
     [-90, -180],
     [90, 180],
   ];
+
+  useEffect(() => {
+    if (numberOfRound === 5) {
+      setIsGameOver(true);
+      console.log(isGameOver, numberOfRound)
+    }
+  }, [numberOfRound]);
+
 
   const icon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
@@ -40,8 +53,9 @@ function Map() {
       alert("Lütfen tahmin yapın");
     } else {
       const distance = findDistance(data, guess);
-      const score = setScore(distance);
-      console.log(score);
+      const score = parseFloat(setScore(distance));
+      setroundScore(score);
+      settotalScore(totalScore + roundScore);
       setGuessed(true);
     }
   };
@@ -71,67 +85,79 @@ function Map() {
   }
 
   const generateNewCoordinate = () => {
-    // puanı depola
+    if (!isGameOver) {
+      setnumberOfRound(prevRound => prevRound + 1);
+      console.log(numberOfRound);
+      // puanı depola
 
-    // sokak görünümünü yenile
-    dispatch(restartCoordinate());
-    // tahmin verilerini sıfırla
-    setGuess({ lat: "", lng: "" });
-    setGuessed(false);
+      console.log("yeni harita eklenmeyecek", isGameOver)
+      // sokak görünümünü yenile
+      dispatch(restartCoordinate());
+      // tahmin verilerini sıfırla
+      setGuess({ lat: "", lng: "" });
+      setGuessed(false);
+    }
   };
 
   return (
-    <div className={styles.mainContainer}>
-      <MapContainer
-        className={styles.mapContainer}
-        center={center}
-        zoom={5}
-        scrollWheelZoom={true}
-        zoomControl={false}
-        maxBounds={wolrdBounds}
-        maxBoundsViscosity={1.0}
-        minZoom={2}
-        maxZoom={8}>
-        <TileLayer
-          noWrap={true}
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {guess.lat === "" || guess.lng === "" ? (
-          ""
-        ) : (
-          <Marker position={guess} icon={icon}>
-            <Popup>Your Guess</Popup>
-          </Marker>
-        )}
-        {isGuessed ? (
-          <Polyline
-            pathOptions={pathOptions}
-            positions={[
-              [data.lat, data.lng],
-              [guess.lat, guess.lng],
-            ]}></Polyline>
-        ) : (
-          ""
-        )}
-        {isGuessed ? (
-          <Marker position={data} icon={icon}>
-            <Popup>Real Coordinate</Popup>
-          </Marker>
-        ) : (
-          ""
-        )}
-        <MapEvents></MapEvents>
-      </MapContainer>
-      <button
-        onClick={isGuessed ? generateNewCoordinate : calculateDistanceNScore}
-        className={
-          guess.lat === "" || guess.lng === ""
-            ? styles.buttonNoGuess
-            : styles.buttonGuess
-        }>
-        {isGuessed ? "New Coordinate" : "Complete your guess!"}
-      </button>
-    </div>
+    isGameOver ? <ResultPage totalScore={totalScore} />
+      : (
+        <div className={styles.mainContainer} style={{ color: "black", fontSize: 24 }}>
+
+          {isGuessed ? "Round Score:" + roundScore : null}
+          <MapContainer
+            className={styles.mapContainer}
+            center={center}
+            zoom={5}
+            scrollWheelZoom={true}
+            zoomControl={false}
+            maxBounds={wolrdBounds}
+            maxBoundsViscosity={1.0}
+            minZoom={2}
+            maxZoom={18}
+          >
+            <TileLayer
+              noWrap={true}
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
+            />
+            {guess.lat === "" || guess.lng === "" ? (
+              ""
+            ) : (
+              <Marker position={guess} icon={icon}>
+                <Popup>Your Guess</Popup>
+              </Marker>
+            )}
+            {isGuessed ? (
+              <Polyline
+                pathOptions={pathOptions}
+                positions={[
+                  [data.lat, data.lng],
+                  [guess.lat, guess.lng],
+                ]}></Polyline>
+            ) : (
+              ""
+            )}
+            {isGuessed ? (
+              <Marker position={data} icon={icon}>
+                <Popup>Real Coordinate</Popup>
+              </Marker>
+            ) : (
+              ""
+            )}
+            <MapEvents></MapEvents>
+
+          </MapContainer>
+          <button
+            onClick={isGuessed ? generateNewCoordinate : calculateDistanceNScore}
+            className={
+              guess.lat === "" || guess.lng === ""
+                ? styles.buttonNoGuess
+                : styles.buttonGuess
+            }>
+            {isGuessed ? "New Coordinate" : "Complete your guess!"}
+          </button>
+        </div>
+      )
   );
 }
 
