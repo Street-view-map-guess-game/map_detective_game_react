@@ -27,9 +27,10 @@
 .buttonNoGuess {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  font-size: medium;
   height: 30px;
   color: rgba(200, 200, 200, 0.7);
-  font-weight: bolder;
+  font-weight: bold;
   margin-top: 10px;
   transition: 0.4s;
   cursor: not-allowed;
@@ -37,10 +38,36 @@
 
 .buttonGuess {
   background: #37f725;
+  font-size: medium;
   border-radius: 10px;
   height: 30px;
   color: rgba(255, 255, 255, 1);
   font-weight: bolder;
   margin-top: 10px;
   transition: 0.4s;
+}
+
+.counterVal {
+  color: #fecd19;
+  font-weight: bold;
+}
+
+.bttnNewGuess {
+  background: #26c218;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  text-align: center;
+  font-size: medium;
+  border-radius: 20px;
+  height: 30px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: bolder;
+  margin-top: 10px;
+  transition: 0.4s;
+}
+
+.bttnNewGuess:hover {
+  background: #1c9011;
 }

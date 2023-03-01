@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
-import { act } from "@testing-library/react";
 
 export const mapSlice = createSlice({
   name: "coordinates",
   initialState: {
     coordinate: { lat: 0, lng: 0 },
     isRestarted: false,
+    isGuessed: false,
   },
   reducers: {
     storeCoordinate: {
@@ -19,8 +18,14 @@ export const mapSlice = createSlice({
         state.isRestarted = !state.isRestarted;
       },
     },
+    openCloseResultPage: {
+      reducer: (state, action) => {
+        state.isGuessed = !state.isGuessed;
+      },
+    },
   },
 });
 
-export const { storeCoordinate, restartCoordinate } = mapSlice.actions;
+export const { storeCoordinate, restartCoordinate, openCloseResultPage } =
+  mapSlice.actions;
 export default mapSlice.reducer;
