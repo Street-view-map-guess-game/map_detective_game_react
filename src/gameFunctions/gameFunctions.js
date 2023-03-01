@@ -20,6 +20,6 @@ export const setScore = (distance) => {
     score = 10;
   }
 
-  return score;
+  return score.toFixed(2);
 
 };
