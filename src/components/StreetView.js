@@ -6,9 +6,12 @@ import Loadingpage from "../pages/LoadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 import Compass from "./Compass.js";
 
+import styles from "../styles/mapStyle.module.css"
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
 function StreetView({ countryName }) {
+  const numberOfRound = useSelector((state) => state.gmSlc.numOfRound);
+  const totalScore = useSelector((state) => state.gmSlc.totalScore);
   const refresh = useSelector((state) => state.mapSlc.isRestarted);
   const dispatch = useDispatch();
   const [streetViewIsLoaded, setStreetViewIsLoaded] = useState(false);
@@ -96,22 +99,37 @@ function StreetView({ countryName }) {
   };
 
   return (
-    <div
-      id="pano"
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        height: "100%",
-        width: "100%",
-        filter: "invert(1)",
-      }}>
+    <>
+      <div
+        id="pano"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "100%",
+          filter: "invert(1)",
+        }}>
+      </div>
       {streetViewIsLoaded ? (
         <Compass panorama={newPanorama} />
       ) : (
         <Loadingpage />
       )}
-    </div>
+      <div className="flex justify-start mt-10 text-white text-2xl">
+        {/*  space-y-10  kaldırılabilir  */}
+        <div className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 space-y-10 shadow-lg rounded-md" style={{ zIndex: 9999, userSelect: "none", }}>
+          <div>Round
+            <span className={styles.counterVal}><br />{numberOfRound + 1}/6</span>
+          </div>
+          {/* <div>Country
+            <span className={styles.counterVal}><br />{countryName.charAt(0).toUpperCase() + countryName.slice(1)}</span>
+          </div> */}
+          <div>Score
+            <span className={styles.counterVal}><br />{totalScore.toFixed(0)}</span></div>
+        </div>
+      </div>
+    </>
   );
 }
 
