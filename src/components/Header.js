@@ -22,9 +22,11 @@ function Header() {
           <img src={require("../assets/images/pageImage/siteLogo.png")} />
         </div>
         <p>Map Detective</p>
-        
+
       </a>
-      <button className="" onClick={handleSignOut}>Logout</button>
+      <div className="right-10 absolute">
+        <button className="bg-transparent hover:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 text-white font-bold py-2 px-4 rounded border border-white" onClick={handleSignOut}>Logout</button>
+      </div>
     </div>
   );
 }
