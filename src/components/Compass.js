@@ -70,6 +70,10 @@ function Compass({ panorama }) {
         pov.heading = newHeading;
         panorama.setPov(pov);
     };
+    // pusula resminin sürüklenmesini engeller
+    function handleDragStart(event) {
+        event.preventDefault();
+    }
 
     return (
         <div
@@ -84,13 +88,7 @@ function Compass({ panorama }) {
             onMouseMove={handleMouseMove}
             onClick={handleCompassClick}
         >
-            <img
-                src={compassNeddle}
-                alt="compass needle"
-                width="100"
-                height="100"
-                style={{ transform: compassRotation }}
-            />
+
             <div
                 style={{
                     userSelect: "none",
@@ -107,6 +105,14 @@ function Compass({ panorama }) {
                 }}
             >
             </div>
+            <img
+                src={compassNeddle}
+                alt="compass needle"
+                width="100"
+                height="100"
+                style={{ transform: compassRotation }}
+                onDragStart={handleDragStart}
+            />
         </div>
     );
 }
