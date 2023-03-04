@@ -78,7 +78,7 @@ function ResultPage({ score, guess }) {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 9999,
+        zIndex: 10,
         fontSize: 80,
       }}>
       <div className="-mt-24 sm:mt-0 text-center">

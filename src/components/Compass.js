@@ -77,7 +77,6 @@ function Compass({ panorama }) {
                 position: "absolute",
                 top: 25,
                 right: 25,
-                zIndex: 9999,
                 fontSize: 80,
             }}
             onMouseDown={handleMouseDown}
