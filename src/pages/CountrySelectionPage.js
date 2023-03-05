@@ -8,6 +8,7 @@ import pisa_tower from "../assets/images/countryImage/pisa_tower(italy).jpg";
 import palacio_de_la_pena from "../assets/images/countryImage/palacio_de_la_pena(portugal).jpg";
 import buckingham_palace from "../assets/images/countryImage/buckingham-palace(england).jpg";
 import kiyomizu_dera_buddhist_temple from "../assets/images/countryImage/kiyomizu_dera_buddhist_temple(japan).jpeg";
+import windmill_netherlands from "../assets/images/countryImage/windmill(netherlands).jpg";
 import earth from "../assets/images/countryImage/earth.jpg";
 
 function CountrySelectionPage() {
@@ -71,8 +72,8 @@ function CountrySelectionPage() {
           />
            <Card
             title="NETHERLANDS"
-            imageUrl={null}
-            imageAlt="NULL"
+            imageUrl={windmill_netherlands}
+            imageAlt="windmill Netherlands"
             description="Continue with NETHERLANDS"
             countryName="netherlands"
           />
