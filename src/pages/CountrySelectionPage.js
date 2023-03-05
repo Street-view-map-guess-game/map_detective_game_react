@@ -69,6 +69,13 @@ function CountrySelectionPage() {
             description="Continue with JAPAN"
             countryName="japan"
           />
+           <Card
+            title="NETHERLANDS"
+            imageUrl={null}
+            imageAlt="NULL"
+            description="Continue with NETHERLANDS"
+            countryName="netherlands"
+          />
           <Card
             title="WOLRD"
             imageUrl={earth}

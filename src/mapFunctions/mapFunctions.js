@@ -13,6 +13,8 @@ export const getRandomCoordinate = ({ countryName }) => {
 
   //bölgelerden birini seçiyor
 
+  console.log(countryName)
+
   var randomRegion = Math.floor(Math.random() * coordinates.length);
 
   // json uzantılı dosyadan fransa koordinat verilerini çekme

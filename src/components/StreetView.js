@@ -6,6 +6,7 @@ import Loadingpage from "../pages/LoadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 import Compass from "./Compass.js";
 
+import allcoordinates from "../allCoordinates/coordinates.json";
 import styles from "../styles/mapStyle.module.css"
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
@@ -17,6 +18,18 @@ function StreetView({ countryName }) {
   const [streetViewIsLoaded, setStreetViewIsLoaded] = useState(false);
   const [newPanorama, setnewPanorama] = useState(false);
 
+  if (countryName === "world") {
+    document.title = "WORLD - Map Detective";
+    const arrays = Object.values(allcoordinates);
+    const arrayCount = arrays.length;
+    const arrayNames = Object.keys(allcoordinates);
+
+    var randomCountry = Math.floor(Math.random() * arrayCount);
+    var countryName = arrayNames[randomCountry].replace("coordinates", "");;
+
+    console.log(randomCountry, countryName);
+  }
+
   useEffect(() => {
     refreshcordinate();
   }, [refresh]);
@@ -24,7 +37,7 @@ function StreetView({ countryName }) {
   const refreshcordinate = () => {
     const data = getRandomCoordinate({ countryName });
     const sv = new window.google.maps.StreetViewService();
-    sv.getPanorama({ location: data, radius: 50000 }, processSVData);
+    sv.getPanorama({ location: data, radius: 40000 }, processSVData);
   };
 
   const processSVData = (data, status) => {

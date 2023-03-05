@@ -20,7 +20,7 @@ function Header() {
     <div className="navbar bg-base-100 h-20  top-0 z-10 fixed ">
       <a href="#" className="px-28 sm:px-0 btn btn-ghost normal-case text-xl">
         <div className="w-24 flex">
-          <img className='absolute top-5 left-5 opacity-80' width="300" src={whiteLogo} alt="logo"></img>
+          <img className='absolute top-5 left-5 opacity-80' width="200" src={whiteLogo} alt="logo"></img>
         </div>
       </a>
       <div className="right-10 absolute">
