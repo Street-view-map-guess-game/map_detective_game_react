@@ -14,7 +14,7 @@ export default function Loadingpage() {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 5000
+        zIndex: 9999
       }}
     >
       <img style={{ marginBottom: "40px", marginLeft: "5px" }} src={mapdetectivelogo} alt="logo" width={"230rem"} className='absolute  opacity-60' />
