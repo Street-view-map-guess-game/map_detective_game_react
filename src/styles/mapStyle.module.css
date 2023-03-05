@@ -13,6 +13,25 @@
   transition-delay: 0s;
 }
 
+.mobileMapContainer {
+  height: 200px;
+  width: 300px;
+  cursor: default;
+  border-radius: 10px;
+  transition: 0.4s;
+  transition-delay: 1s;
+}
+
+.mobileMainContainer {
+  position: absolute;
+  z-index: 1000;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
 .mainContainer {
   position: absolute;
   z-index: 1000;

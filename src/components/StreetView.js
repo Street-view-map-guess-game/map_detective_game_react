@@ -82,6 +82,8 @@ function StreetView({ countryName }) {
             setTimeout(() => {
               const developmentDiv = [...document.querySelectorAll('div')].find(el => el.textContent === 'For development purposes only');
               developmentDiv.remove()
+              const developmentDiv2 = [...document.querySelectorAll('div')].find(el => el.textContent === "This page can't load Google Maps correctly.").parentElement;
+              developmentDiv2.remove()
             }, 1000);
 
             // tıklanabilir linkleri silen kod parçası
