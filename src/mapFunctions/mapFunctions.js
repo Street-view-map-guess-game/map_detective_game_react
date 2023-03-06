@@ -7,13 +7,21 @@ function getRandomNumber(min, max) {
 }
 
 export const getRandomCoordinate = ({ countryName }) => {
+
+  //eger world seçilmişse
+  if (countryName === "world") {
+    const arrays = Object.values(allcoordinates);
+    const arrayCount = arrays.length;
+    const arrayNames = Object.keys(allcoordinates);
+    var randomCountry = Math.floor(Math.random() * arrayCount);
+    countryName = arrayNames[randomCountry].replace("coordinates", "");
+  }
+
   // url kısmından ülke ismi alıyor
   var coordinates = allcoordinates[countryName + "coordinates"];
   var randomSmallAreaLat, randomSmallAreaLng;
 
   //bölgelerden birini seçiyor
-
-  console.log(countryName)
 
   var randomRegion = Math.floor(Math.random() * coordinates.length);
 

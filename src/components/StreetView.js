@@ -10,7 +10,6 @@ import {
   restartGame,
 } from "../Redux/MapGameSlices/gameSlice";
 
-import allcoordinates from "../allCoordinates/coordinates.json";
 import styles from "../styles/mapStyle.module.css";
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
@@ -22,18 +21,6 @@ function StreetView({ countryName }) {
   const dispatch = useDispatch();
   const [streetViewIsLoaded, setStreetViewIsLoaded] = useState(false);
   const [newPanorama, setnewPanorama] = useState(false);
-
-  if (countryName === "world") {
-    document.title = "WORLD - Map Detective";
-    const arrays = Object.values(allcoordinates);
-    const arrayCount = arrays.length;
-    const arrayNames = Object.keys(allcoordinates);
-
-    var randomCountry = Math.floor(Math.random() * arrayCount);
-    var countryName = arrayNames[randomCountry].replace("coordinates", "");
-
-    console.log(randomCountry, countryName);
-  }
 
   useEffect(() => {
     refreshcordinate();
