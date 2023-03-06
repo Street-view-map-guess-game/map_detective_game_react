@@ -26,6 +26,9 @@ function Map() {
   const [result, setResultPage] = useState(false);
   const [roundScore, setroundScore] = useState(0.0);
 
+  const isMobileHeight = useMediaQuery({ maxHeight: 700 });
+  const isMobile = useMediaQuery({ maxWidth: 700 }) || isMobileHeight;
+  const [mobileMapButton, setmobileMapButton] = useState(false);
 
 
   // Dünya sınırları için
@@ -70,9 +73,6 @@ function Map() {
     return null;
   }
 
-  const isMobile = useMediaQuery({ maxWidth: 700 });
-  const [mobileMapButton, setmobileMapButton] = useState(false);
-
   return result ? (
     <ResultPage score={roundScore} guess={guess}></ResultPage>
   ) : (
@@ -100,7 +100,7 @@ function Map() {
             style={{ color: "black", fontSize: 24 }}>
             <MapContainer
               className={styles.mobileMapContainer}
-              style={{ width: window.innerWidth }}
+              style={{ width: isMobileHeight ? window.innerHeight : window.innerWidth }}
               center={center}
               zoom={5}
               scrollWheelZoom={true}

@@ -15,11 +15,8 @@
 
 .mobileMapContainer {
   height: 200px;
-  width: 300px;
   cursor: default;
   border-radius: 10px;
-  transition: 0.4s;
-  transition-delay: 1s;
 }
 
 .mobileMainContainer {

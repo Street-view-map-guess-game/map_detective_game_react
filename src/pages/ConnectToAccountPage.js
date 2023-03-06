@@ -40,8 +40,8 @@ export default function ConnectToAccountPage() {
         className="object-fit opacity-100 group-hover:opacity-0 py-8 px-12  h-72 w-76 hover:scale-150 transition duration-500"
         src={logo}></img>
     </div>
-    <div class=" absolute translate-y-8  opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 duration-500">
-      <p class="text-2xl font-bold	 text-black"></p>
+    <div className=" absolute translate-y-8  opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 duration-500">
+      <p className="text-2xl font-bold	 text-black"></p>
       <GoogleButton onClick={handleGoogleSignIn} />
     </div>
   </div>
