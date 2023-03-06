@@ -26,8 +26,8 @@ function Map() {
   const [result, setResultPage] = useState(false);
   const [roundScore, setroundScore] = useState(0.0);
 
-  const isMobileHeight = useMediaQuery({ maxHeight: 700 });
-  const isMobile = useMediaQuery({ maxWidth: 700 }) || isMobileHeight;
+  const isMobileHeight = useMediaQuery({ maxHeight: 600 });
+  const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
   const [mobileMapButton, setmobileMapButton] = useState(false);
 
 
@@ -100,7 +100,7 @@ function Map() {
             style={{ color: "black", fontSize: 24 }}>
             <MapContainer
               className={styles.mobileMapContainer}
-              style={{ width: isMobileHeight ? window.innerHeight : window.innerWidth }}
+              style={{ width: isMobileHeight ? window.innerHeight : window.innerWidth, height: isMobileHeight ? window.innerHeight / 2.5 : window.innerWidth / 2 }}
               center={center}
               zoom={5}
               scrollWheelZoom={true}
