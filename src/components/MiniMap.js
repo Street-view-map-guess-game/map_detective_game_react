@@ -16,7 +16,7 @@ import { setScore } from "../gameFunctions/gameFunctions";
 import styles from "../styles/mapStyle.module.css";
 import { findDistance } from "../mapFunctions/mapFunctions";
 import ResultPage from "../pages/ResultPage";
-
+import guessMarker from "../assets/images/pageImage/markers/guessMarker.gif";
 import "leaflet/dist/leaflet.css";
 
 function Map() {
@@ -38,8 +38,9 @@ function Map() {
   ];
 
   const icon = L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
-    iconAnchor: [12, 41], // adjust the anchor point to position the icon above the clicked location
+    iconUrl: guessMarker,
+    iconSize: [50, 50],
+    iconAnchor: [25, 50], // adjust the anchor point to position the icon above the clicked location
   });
 
   const calculateDistanceNScore = () => {

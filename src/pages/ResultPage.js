@@ -1,21 +1,25 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Polyline } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import {
   calculateTotalScore,
   restartGame,
   increaseNumberOfRounds,
 } from "../Redux/MapGameSlices/gameSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   openCloseResultPage,
   restartCoordinate,
 } from "../Redux/MapGameSlices/mapSlice";
-import { useState, useEffect } from "react";
 import styles from "../styles/mapStyle.module.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
 import Counter from "../components/Counter";
+
+import userGuessMarker from "../assets/images/pageImage/markers/userGuessMarker.png";
+import correctLocationMarker from "../assets/images/pageImage/markers/correctGuessMarker.png";
 
 function ResultPage({ score, guess }) {
   const numberOfRound = useSelector((state) => state.gmSlc.numOfRound);
@@ -25,9 +29,16 @@ function ResultPage({ score, guess }) {
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  const icon = L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
-    iconAnchor: [12, 41], // adjust the anchor point to position the icon above the clicked location
+
+  const userMarker = L.icon({
+    iconUrl: userGuessMarker,
+    iconSize: [50, 50],
+    iconAnchor: [25, 50], // adjust the anchor point to position the icon above the clicked location
+  });
+  const realCoorMarker = L.icon({
+    iconUrl: correctLocationMarker,
+    iconSize: [50, 50],
+    iconAnchor: [25, 50], // adjust the anchor point to position the icon above the clicked location
   });
 
   const wolrdBounds = [
@@ -102,7 +113,7 @@ function ResultPage({ score, guess }) {
             url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
           />
 
-          <Marker position={guess} icon={icon}>
+          <Marker position={guess} icon={userMarker}>
             <Popup>Your Guess</Popup>
           </Marker>
 
@@ -113,7 +124,7 @@ function ResultPage({ score, guess }) {
               [guess.lat, guess.lng],
             ]}></Polyline>
 
-          <Marker position={data} icon={icon}>
+          <Marker position={data} icon={realCoorMarker}>
             <Popup>Real Coordinate</Popup>
           </Marker>
         </MapContainer>
