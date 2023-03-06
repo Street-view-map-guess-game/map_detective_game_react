@@ -5,12 +5,17 @@ import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import Loadingpage from "../pages/LoadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 import Compass from "./Compass.js";
+import {
+  StoreCountryName,
+  restartGame,
+} from "../Redux/MapGameSlices/gameSlice";
 
 import allcoordinates from "../allCoordinates/coordinates.json";
-import styles from "../styles/mapStyle.module.css"
+import styles from "../styles/mapStyle.module.css";
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
 function StreetView({ countryName }) {
+  const storedName = useSelector((state) => state.gmSlc.countryName);
   const numberOfRound = useSelector((state) => state.gmSlc.numOfRound);
   const totalScore = useSelector((state) => state.gmSlc.totalScore);
   const refresh = useSelector((state) => state.mapSlc.isRestarted);
@@ -25,14 +30,18 @@ function StreetView({ countryName }) {
     const arrayNames = Object.keys(allcoordinates);
 
     var randomCountry = Math.floor(Math.random() * arrayCount);
-    var countryName = arrayNames[randomCountry].replace("coordinates", "");;
+    var countryName = arrayNames[randomCountry].replace("coordinates", "");
 
     console.log(randomCountry, countryName);
   }
 
   useEffect(() => {
     refreshcordinate();
-  }, [refresh]);
+    if (storedName !== countryName) {
+      dispatch(StoreCountryName(countryName));
+      dispatch(restartGame());
+    }
+  }, [refresh, countryName]);
 
   const refreshcordinate = () => {
     const data = getRandomCoordinate({ countryName });
@@ -80,10 +89,18 @@ function StreetView({ countryName }) {
           function () {
             //bunu anca settimeout ile yapabildim
             setTimeout(() => {
-              const developmentDiv = [...document.querySelectorAll('div')].find(el => el.textContent === 'For development purposes only');
-              developmentDiv.remove()
-              const developmentDiv2 = [...document.querySelectorAll('div')].find(el => el.textContent === "This page can't load Google Maps correctly.").parentElement;
-              developmentDiv2.remove()
+              const developmentDiv = [...document.querySelectorAll("div")].find(
+                (el) => el.textContent === "For development purposes only"
+              );
+              developmentDiv.remove();
+              const developmentDiv2 = [
+                ...document.querySelectorAll("div"),
+              ].find(
+                (el) =>
+                  el.textContent ===
+                  "This page can't load Google Maps correctly."
+              ).parentElement;
+              developmentDiv2.remove();
             }, 1000);
 
             // tıklanabilir linkleri silen kod parçası
@@ -124,24 +141,34 @@ function StreetView({ countryName }) {
           height: "100%",
           width: "100%",
           filter: "invert(1)",
-        }}>
-      </div>
+        }}></div>
       {streetViewIsLoaded ? (
         <Compass panorama={newPanorama} />
       ) : (
         <Loadingpage />
       )}
-      <div className="flex justify-start mt-10 text-white text-2xl">
+      <div className="flex justify-start ml-6 mt-10 text-white text-2xl">
         {/*  space-y-10  kaldırılabilir  */}
-        <div className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 space-y-10 shadow-lg rounded-md" style={{ zIndex: 9, userSelect: "none", }}>
-          <div>Round
-            <span className={styles.counterVal}><br />{numberOfRound + 1}/6</span>
+        <div
+          className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 space-y-10 shadow-lg rounded-md"
+          style={{ zIndex: 9, userSelect: "none" }}>
+          <div>
+            Round
+            <span className={styles.counterVal}>
+              <br />
+              {numberOfRound + 1}/6
+            </span>
           </div>
           {/* <div>Country
             <span className={styles.counterVal}><br />{countryName.charAt(0).toUpperCase() + countryName.slice(1)}</span>
           </div> */}
-          <div>Score
-            <span className={styles.counterVal}><br />{totalScore.toFixed(0)}</span></div>
+          <div>
+            Score
+            <span className={styles.counterVal}>
+              <br />
+              {totalScore.toFixed(0)}
+            </span>
+          </div>
         </div>
       </div>
     </>

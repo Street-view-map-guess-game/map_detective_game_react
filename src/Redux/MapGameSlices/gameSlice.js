@@ -5,6 +5,7 @@ export const gameSlice = createSlice({
   initialState: {
     totalScore: 0,
     numOfRound: 0,
+    countryName: "",
   },
   reducers: {
     calculateTotalScore: {
@@ -23,9 +24,18 @@ export const gameSlice = createSlice({
         state.totalScore = 0;
       },
     },
+    StoreCountryName: {
+      reducer: (state, action) => {
+        state.countryName = action.payload;
+      },
+    },
   },
 });
 
-export const { calculateTotalScore, increaseNumberOfRounds, restartGame } =
-  gameSlice.actions;
+export const {
+  calculateTotalScore,
+  increaseNumberOfRounds,
+  restartGame,
+  StoreCountryName,
+} = gameSlice.actions;
 export default gameSlice.reducer;
