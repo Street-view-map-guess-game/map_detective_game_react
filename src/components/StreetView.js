@@ -135,9 +135,8 @@ function StreetView({ countryName }) {
         <Loadingpage />
       )}
       <div className="flex justify-start ml-6 mt-10 text-white text-2xl">
-        {/*  space-y-10  kaldırılabilir  */}
         <div
-          className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 space-y-10 shadow-lg rounded-md"
+          className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 shadow-lg rounded-md border-2 border-white text-center"
           style={{ zIndex: 9, userSelect: "none" }}>
           <div>
             Round
@@ -146,9 +145,9 @@ function StreetView({ countryName }) {
               {numberOfRound + 1}/6
             </span>
           </div>
-          {/* <div>Country
+          <div>Country
             <span className={styles.counterVal}><br />{countryName.charAt(0).toUpperCase() + countryName.slice(1)}</span>
-          </div> */}
+          </div>
           <div>
             Score
             <span className={styles.counterVal}>
