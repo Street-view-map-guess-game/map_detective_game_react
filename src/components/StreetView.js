@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleApiWrapper } from "google-maps-react";
+
 import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import Loadingpage from "../pages/LoadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
@@ -14,8 +15,9 @@ import InfoCard from "./UI/gameInfoCard";
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
 function StreetView({ countryName }) {
+
+  // distance game modu için
   const storedName = useSelector((state) => state.gmSlc.countryName);
- 
   const refresh = useSelector((state) => state.mapSlc.isRestarted);
   const dispatch = useDispatch();
   const [streetViewIsLoaded, setStreetViewIsLoaded] = useState(false);

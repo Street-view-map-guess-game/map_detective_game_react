@@ -8,7 +8,6 @@ import {
   Popup,
   GeoJSON
 } from "react-leaflet";
-import L from "leaflet";
 import { useMediaQuery } from "react-responsive"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
@@ -30,10 +29,18 @@ function MinimapCountrySelection() {
   const [result, setResultPage] = useState(false);
   const [roundScore, setroundScore] = useState(0.0);
 
+  const [falseGuessNumber, setFalseGuessNumber] = useState(0)
+
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCountryKey, setSelectedCountryKey] = useState(null);
   const [realCountryKey, setRealCountryKey] = useState(null);
+  const [selectedCountryColor, setSelectedCountryColor] = useState({
+    fillColor: 'purple',
+    fillOpacity: 0.5,
+    color: 'black',
+    weight: 2,
+  });
 
   const isMobileHeight = useMediaQuery({ maxHeight: 600 });
   const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
@@ -64,15 +71,37 @@ function MinimapCountrySelection() {
     }
   }, [data]);
 
+  useEffect(() => {
+    setSelectedCountryColor({
+      fillColor: 'purple',
+      fillOpacity: 0.5,
+      color: 'black',
+      weight: 2,
+    })
+  }, [selectedCountryKey]);
+
   const countryControl = () => {
     if (selectedCountryKey === null) {
       alert("Lütfen tahmin yapın");
     } else {
       if (selectedCountryKey === realCountryKey) {
         console.log("True,Congratulations")
+        setSelectedCountryColor({
+          fillColor: 'green',
+          fillOpacity: 0.5,
+          color: 'black',
+          weight: 2,
+        })
       }
       else {
         console.log("False,Please try again")
+        setSelectedCountryColor({
+          fillColor: 'red',
+          fillOpacity: 0.5,
+          color: 'black',
+          weight: 2,
+        })
+        setFalseGuessNumber(falseGuessNumber + 1)
       }
     }
   };
@@ -142,12 +171,7 @@ function MinimapCountrySelection() {
                 <GeoJSON
                   key={selectedCountryKey}
                   data={selectedCountry}
-                  style={{
-                    fillColor: 'purple',
-                    fillOpacity: 0.5,
-                    color: 'black',
-                    weight: 2,
-                  }}
+                  style={selectedCountryColor}
                 />
               )}
 
@@ -201,12 +225,7 @@ function MinimapCountrySelection() {
             <GeoJSON
               key={selectedCountryKey}
               data={selectedCountry}
-              style={{
-                fillColor: 'purple',
-                fillOpacity: 0.5,
-                color: 'black',
-                weight: 2,
-              }}
+              style={selectedCountryColor}
             />
           )}
 
