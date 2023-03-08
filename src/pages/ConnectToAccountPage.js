@@ -22,7 +22,7 @@ export default function ConnectToAccountPage() {
     setTimeout(() => {
       settime(true)
       if (user) {
-        navigate("/countryselection");
+        navigate("/gamemodpage");
       }
     }, 1000);
     

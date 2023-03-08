@@ -56,7 +56,7 @@ export default function FirstPage() {
             //         </Link>
 
             // </div>
-            user ? (<Navigate to='/countryselection' />) : (
+            user ? (<Navigate to='/gamemodpage' />) : (
                 <>
 
                     <Particles
