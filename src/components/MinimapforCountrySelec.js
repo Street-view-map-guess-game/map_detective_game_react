@@ -30,6 +30,11 @@ function MinimapCountrySelection() {
   const [result, setResultPage] = useState(false);
   const [roundScore, setroundScore] = useState(0.0);
 
+  const data = useSelector((state) => state.mapSlc.coordinate);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountryKey, setSelectedCountryKey] = useState(null);
+  const [realCountryKey, setRealCountryKey] = useState(null);
+
   const isMobileHeight = useMediaQuery({ maxHeight: 600 });
   const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
   const [mobileMapButton, setmobileMapButton] = useState(false);
@@ -46,14 +51,8 @@ function MinimapCountrySelection() {
     lng: guess.lng !== "" ? guess.lng : 35.2433,
   };
 
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedCountryKey, setSelectedCountryKey] = useState(null);
-  const [realCountryKey, setRealCountryKey] = useState(null);
 
-  const data = useSelector((state) => state.mapSlc.coordinate);
-
-
-  //hangi ülkenin sınırları içinde
+  //sokak görünümü hangi ülkenin sınırları içinde
   useEffect(() => {
     const dataArray = [data.lng, data.lat];
     const pointCoord = point(dataArray);
@@ -64,10 +63,6 @@ function MinimapCountrySelection() {
       }
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log(realCountryKey)
-  }, [realCountryKey]);
 
   const countryControl = () => {
     if (selectedCountryKey === null) {
