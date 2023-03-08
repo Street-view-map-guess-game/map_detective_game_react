@@ -9,14 +9,13 @@ import {
   StoreCountryName,
   restartGame,
 } from "../Redux/MapGameSlices/gameSlice";
+import InfoCard from "./UI/gameInfoCard";
 
-import styles from "../styles/mapStyle.module.css";
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
 function StreetView({ countryName }) {
   const storedName = useSelector((state) => state.gmSlc.countryName);
-  const numberOfRound = useSelector((state) => state.gmSlc.numOfRound);
-  const totalScore = useSelector((state) => state.gmSlc.totalScore);
+ 
   const refresh = useSelector((state) => state.mapSlc.isRestarted);
   const dispatch = useDispatch();
   const [streetViewIsLoaded, setStreetViewIsLoaded] = useState(false);
@@ -134,29 +133,7 @@ function StreetView({ countryName }) {
       ) : (
         <Loadingpage />
       )}
-      <div className="flex justify-start ml-6 mt-10 text-white text-2xl">
-        <div
-          className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 shadow-lg rounded-md border-2 border-white text-center"
-          style={{ zIndex: 9, userSelect: "none" }}>
-          <div>
-            Round
-            <span className={styles.counterVal}>
-              <br />
-              {numberOfRound + 1}/6
-            </span>
-          </div>
-          <div>Country
-            <span className={styles.counterVal}><br />{countryName.charAt(0).toUpperCase() + countryName.slice(1)}</span>
-          </div>
-          <div>
-            Score
-            <span className={styles.counterVal}>
-              <br />
-              {totalScore.toFixed(0)}
-            </span>
-          </div>
-        </div>
-      </div>
+      <InfoCard countryName={countryName}/>
     </>
   );
 }

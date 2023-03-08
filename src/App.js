@@ -7,6 +7,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import ConnectToAccountPage from "./pages/ConnectToAccountPage";
 import Protected from "./components/Protected";
 import FirstPage from "./pages/FirstPage";
+import GameModSelectionPage from "./pages/GameModSelectionPage";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<FirstPage></FirstPage>}></Route>
           <Route path="/connectaccount" element={<ConnectToAccountPage></ConnectToAccountPage>}></Route>
-          <Route exact path="/countryselection" element={<Protected><CountrySelectionPage /></Protected>}></Route>
-          <Route path="/gamescreen?/:countryName" element={<Protected><GamePage /></Protected>} />
+          <Route path="/gamemodpage" element={<Protected><GameModSelectionPage /></Protected>}></Route>
+          <Route exact path="?/:gameMod/countryselection" element={<Protected><CountrySelectionPage /></Protected>}></Route>
+          <Route path="?/:gameMod?/:countryName" element={<Protected><GamePage /></Protected>} />
           {/* protected ile giriş yapılmadan saydfalara girilmesini engelliyoruz */}
         </Routes>
       </BrowserRouter>

@@ -1,17 +1,28 @@
-.mapContainer {
-  height: 200px;
-  width: 300px;
-  cursor: default;
-  border-radius: 10px;
-  transition: 0.4s;
-  transition-delay: 1s;
+.mainContainer {
+  position: absolute;
+  z-index: 1000;
+  right: 10px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
-.mapContainer:hover {
+.mapContainer {
+  height: 300px;
+  width: 30rem;
+  cursor: default;
+  border-radius: 10px;
+  /* transition: 0.4s;
+  transition-delay: 1s; */
+}
+/* hover render edilmede sıkıntı çıkardığı için kaldırıldı */
+/* .mapContainer:hover {
   height: 300px;
   width: 30rem;
   transition-delay: 0s;
-}
+} */
 
 .mobileMapContainer {
   cursor: default;
@@ -21,17 +32,6 @@
 .mobileMainContainer {
   position: absolute;
   z-index: 1000;
-  bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
-.mainContainer {
-  position: absolute;
-  z-index: 1000;
-  right: 10px;
   bottom: 30px;
   display: flex;
   flex-direction: column;

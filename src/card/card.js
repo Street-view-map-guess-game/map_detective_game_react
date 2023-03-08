@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({ title, imageUrl, imageAlt, description, countryName }) => {
+const Card = ({ title, imageUrl, imageAlt, description, countryName, gameMod }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg relative ">
       <img
@@ -16,7 +16,7 @@ const Card = ({ title, imageUrl, imageAlt, description, countryName }) => {
           <div className="mt-4">
             <Link
               to={{
-                pathname: `/gamescreen/${countryName}`,
+                pathname: `/${gameMod}/${countryName}`,
               }}>
               <button className="bg-transparent hover:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 text-white font-bold py-2 px-4 rounded border border-white">
                 Start Game
