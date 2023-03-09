@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   MapContainer,
   TileLayer,
@@ -13,11 +13,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { point, booleanPointInPolygon } from "@turf/turf";
 
-import { setScore } from "../gameFunctions/gameFunctions";
+
+import {
+  openCloseResultPage,
+  restartCoordinate,
+} from "../Redux/MapGameSlices/mapSlice.js";
 import styles from "../styles/mapStyle.module.css";
-import { findDistance } from "../mapFunctions/mapFunctions";
 import ResultPage from "../pages/ResultPage";
-import guessMarker from "../assets/images/pageImage/markers/guessMarker.gif";
 import "leaflet/dist/leaflet.css";
 
 import countryBorder from "../allCoordinates/countriesborder.json"
@@ -29,9 +31,17 @@ function MinimapCountrySelection() {
   const [result, setResultPage] = useState(false);
   const [roundScore, setroundScore] = useState(0.0);
 
+  // mobil ekran mı bunun kontrolü için değişkenler
+  const isMobileHeight = useMediaQuery({ maxHeight: 600 });
+  const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
+  const [mobileMapButton, setmobileMapButton] = useState(false);
+
+
+  // yanlış tahmin sayısını tutan değişken  
   const [falseGuessNumber, setFalseGuessNumber] = useState(0)
 
   const data = useSelector((state) => state.mapSlc.coordinate);
+
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCountryKey, setSelectedCountryKey] = useState(null);
   const [realCountryKey, setRealCountryKey] = useState(null);
@@ -42,9 +52,21 @@ function MinimapCountrySelection() {
     weight: 2,
   });
 
-  const isMobileHeight = useMediaQuery({ maxHeight: 600 });
-  const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
-  const [mobileMapButton, setmobileMapButton] = useState(false);
+  // bir ülkeyi tekrar seçmesini engellemek için tanımlandı
+  const [blockAgainClick, setBlockAgainClick] = useState(true);
+
+  // yanlış seçilen ülkelerin tutulduğu array
+  const [falseSelectedCountryArray, setFalseSelectedCountryArray] = useState([]);
+
+  const falseSelectedCountryArrayRef = useRef(falseSelectedCountryArray);
+
+  const dispatch = useDispatch();
+
+  // yeni koordinat üreten fonksiyon
+  const generateNewCoordinate = () => {
+    // sokak görünümünü yenile
+    dispatch(restartCoordinate());
+  };
 
 
   // Dünya sınırları için
@@ -56,6 +78,44 @@ function MinimapCountrySelection() {
   const center = {
     lat: guess.lat !== "" ? guess.lat : 38.9637,
     lng: guess.lng !== "" ? guess.lng : 35.2433,
+  };
+
+  // mapte seçilen ülkenin doğru olup olmadığını kontrol eder
+  const countryControl = () => {
+    if (selectedCountryKey === null) {
+      alert("Lütfen tahmin yapın");
+    }
+    else {
+      // ülke seçimi doğru ise
+      if (selectedCountryKey === realCountryKey) {
+        console.log("True,Congratulations")
+        setSelectedCountryColor({
+          fillColor: 'green',
+          fillOpacity: 0.5,
+          color: 'black',
+          weight: 2,
+        })
+        generateNewCoordinate();
+        setTimeout(() => {
+          setSelectedCountry(null)
+          setSelectedCountryKey(null)
+        }, 2000);
+
+        setFalseSelectedCountryArray([]);
+        setBlockAgainClick(false)
+      }
+      // ülke seçimi hatalı ise
+      else {
+        console.log("False,Please try again")
+        // yanlış bilinen ülke sayısı sayacı
+        setFalseGuessNumber(falseGuessNumber + 1)
+        // yanlış bilinen ülkeleri arraye alıyor
+        if (!falseSelectedCountryArray.includes(selectedCountryKey)) {
+          setFalseSelectedCountryArray([...falseSelectedCountryArray, selectedCountryKey]);
+        }
+        setBlockAgainClick(false)
+      }
+    }
   };
 
 
@@ -71,6 +131,8 @@ function MinimapCountrySelection() {
     }
   }, [data]);
 
+
+  // yeni ülke seçilince ülke seçme rengini başlangıç rengine çevirir
   useEffect(() => {
     setSelectedCountryColor({
       fillColor: 'purple',
@@ -80,37 +142,19 @@ function MinimapCountrySelection() {
     })
   }, [selectedCountryKey]);
 
-  const countryControl = () => {
-    if (selectedCountryKey === null) {
-      alert("Lütfen tahmin yapın");
-    } else {
-      if (selectedCountryKey === realCountryKey) {
-        console.log("True,Congratulations")
-        setSelectedCountryColor({
-          fillColor: 'green',
-          fillOpacity: 0.5,
-          color: 'black',
-          weight: 2,
-        })
-      }
-      else {
-        console.log("False,Please try again")
-        setSelectedCountryColor({
-          fillColor: 'red',
-          fillOpacity: 0.5,
-          color: 'black',
-          weight: 2,
-        })
-        setFalseGuessNumber(falseGuessNumber + 1)
-      }
-    }
-  };
 
+  useEffect(() => {
+    falseSelectedCountryArrayRef.current = falseSelectedCountryArray;
+  }, [falseSelectedCountryArray]);
 
   // tıklama ile tıklanan ülkeyi seçme
   const onCountryClick = (e) => {
-    setSelectedCountry(e.target.feature);
-    setSelectedCountryKey(e.target.feature.properties.ISO_A3)
+    setBlockAgainClick(true)
+    const selectedISO_A3 = e.target.feature.properties.ISO_A3;
+    if (!falseSelectedCountryArrayRef.current.includes(selectedISO_A3)) {
+      setSelectedCountry(e.target.feature);
+      setSelectedCountryKey(selectedISO_A3);
+    }
   };
 
 
@@ -174,12 +218,25 @@ function MinimapCountrySelection() {
                   style={selectedCountryColor}
                 />
               )}
-
+              {
+                falseSelectedCountryArray.map((falseCountryKey) => (
+                  <GeoJSON
+                    key={falseCountryKey}
+                    data={countryBorder.features.find(feature => feature.properties.ISO_A3 === falseCountryKey)}
+                    style={{
+                      fillColor: 'red',
+                      fillOpacity: 0.5,
+                      color: 'black',
+                      weight: 2,
+                    }}
+                  />
+                ))
+              }
             </MapContainer>
             <button
-              onClick={countryControl}
+              onClick={blockAgainClick ? (countryControl) : null}
               className={
-                selectedCountry === null
+                (!blockAgainClick || (selectedCountry === null))
                   ? styles.buttonNoGuess
                   : styles.buttonGuess
               }>
@@ -228,12 +285,25 @@ function MinimapCountrySelection() {
               style={selectedCountryColor}
             />
           )}
-
+          {
+            falseSelectedCountryArray.map((falseCountryKey) => (
+              <GeoJSON
+                key={falseCountryKey}
+                data={countryBorder.features.find(feature => feature.properties.ISO_A3 === falseCountryKey)}
+                style={{
+                  fillColor: 'red',
+                  fillOpacity: 0.5,
+                  color: 'black',
+                  weight: 2,
+                }}
+              />
+            ))
+          }
         </MapContainer>
         <button
-          onClick={countryControl}
+          onClick={blockAgainClick ? (countryControl) : null}
           className={
-            selectedCountry === null
+            (!blockAgainClick || (selectedCountry === null))
               ? styles.buttonNoGuess
               : styles.buttonGuess
           }>
