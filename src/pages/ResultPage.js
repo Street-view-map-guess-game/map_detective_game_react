@@ -64,7 +64,7 @@ function ResultPage({ score, guess }) {
 
   const startNewGame = () => {
     dispatch(restartGame());
-    navigate("/countryselection");
+    navigate("/");
   };
 
   useEffect(() => {
