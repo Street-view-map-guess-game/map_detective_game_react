@@ -15,7 +15,7 @@ import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { setScore } from "../gameFunctions/gameFunctions";
 import styles from "../styles/mapStyle.module.css";
 import { findDistance } from "../mapFunctions/mapFunctions";
-import ResultPage from "../pages/ResultPage";
+import ResultPage from "../pages/resultPages/DistanceResultPage";
 import guessMarker from "../assets/images/pageImage/markers/guessMarker.gif";
 import "leaflet/dist/leaflet.css";
 

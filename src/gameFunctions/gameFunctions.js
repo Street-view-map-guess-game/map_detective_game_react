@@ -2,7 +2,6 @@ export const setScore = (distance) => {
 
   const MAX_SCORE = 10000;
   let score = 0;
-  console.log(distance)
 
   if (distance <= 355) {
     score = -(Math.pow(distance, 2) / 20) + 10000;

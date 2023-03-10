@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   MapContainer,
   TileLayer,
-  useMapEvents,
-  Marker,
-  Popup,
   GeoJSON
 } from "react-leaflet";
 import { useMediaQuery } from "react-responsive"
@@ -14,22 +11,15 @@ import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { point, booleanPointInPolygon } from "@turf/turf";
 
 
-import {
-  openCloseResultPage,
-  restartCoordinate,
-} from "../Redux/MapGameSlices/mapSlice.js";
+import { restartCoordinate } from "../Redux/MapGameSlices/mapSlice.js";
 import styles from "../styles/mapStyle.module.css";
-import ResultPage from "../pages/ResultPage";
+import ResultPage from "../pages/resultPages/WhichCountryResultPage";
 import "leaflet/dist/leaflet.css";
 
 import countryBorder from "../allCoordinates/countriesborder.json"
 
 function MinimapCountrySelection() {
-  const doneGuessData = useSelector((state) => state.mapSlc.isGuessed);
-
-  const [guess, setGuess] = useState({ lat: "", lng: "" });
   const [result, setResultPage] = useState(false);
-  const [roundScore, setroundScore] = useState(0.0);
 
   // mobil ekran mı bunun kontrolü için değişkenler
   const isMobileHeight = useMediaQuery({ maxHeight: 600 });
@@ -38,12 +28,26 @@ function MinimapCountrySelection() {
 
 
   // yanlış tahmin sayısını tutan değişken  
-  const [falseGuessNumber, setFalseGuessNumber] = useState(0)
+  const [remaingGuessNumber, setRemaingGuessNumber] = useState(5)
+  //doğru tahmin sayısı
+  const [trueGuessNumber, setTrueGuessNumber] = useState(0)
+
+
+  useEffect(() => {
+    if (remaingGuessNumber <= 0) {
+      setResultPage(true);
+    }
+  }, [remaingGuessNumber])
+  useEffect(() => {
+    console.log(trueGuessNumber)
+  }, [trueGuessNumber])
+
 
   const data = useSelector((state) => state.mapSlc.coordinate);
 
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCountryKey, setSelectedCountryKey] = useState(null);
+  const [realCountry, setRealCountry] = useState(null);
   const [realCountryKey, setRealCountryKey] = useState(null);
   const [selectedCountryColor, setSelectedCountryColor] = useState({
     fillColor: 'purple',
@@ -85,8 +89,8 @@ function MinimapCountrySelection() {
   ];
 
   const center = {
-    lat: guess.lat !== "" ? guess.lat : 38.9637,
-    lng: guess.lng !== "" ? guess.lng : 35.2433,
+    lat: 38.9637,
+    lng: 35.2433,
   };
 
   // mapte seçilen ülkenin doğru olup olmadığını kontrol eder
@@ -104,14 +108,15 @@ function MinimapCountrySelection() {
           color: 'black',
           weight: 2,
         })
+        setTrueGuessNumber(trueGuessNumber + 1)
         alert("CORRECT GUESS!");
         setNextCoordinateButton(true)
       }
       // ülke seçimi hatalı ise
       else {
         console.log("False,Please try again")
-        // yanlış bilinen ülke sayısı sayacı
-        setFalseGuessNumber(falseGuessNumber + 1)
+        // kalan tahmin hakkı
+        setRemaingGuessNumber(remaingGuessNumber - 1)
         // yanlış bilinen ülkeleri arraye alıyor
         if (!falseSelectedCountryArray.includes(selectedCountryKey)) {
           setFalseSelectedCountryArray([...falseSelectedCountryArray, selectedCountryKey]);
@@ -129,6 +134,7 @@ function MinimapCountrySelection() {
       const border = countryBorder.features[i];
       if (booleanPointInPolygon(pointCoord, border)) {
         setRealCountryKey(border.properties.ISO_A3);
+        setRealCountry(border)
       }
     }
   }, [data]);
@@ -161,7 +167,7 @@ function MinimapCountrySelection() {
 
 
   return result ? (
-    <ResultPage score={roundScore} guess={guess}></ResultPage>
+    <ResultPage score={trueGuessNumber} falseCountryArray={falseSelectedCountryArray} realCountry={realCountry} realCountryKey={realCountryKey} />
   ) : (
     isMobile ? (
       //telefon ise 
