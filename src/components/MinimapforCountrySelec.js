@@ -55,6 +55,9 @@ function MinimapCountrySelection() {
   // bir ülkeyi tekrar seçmesini engellemek için tanımlandı
   const [blockAgainClick, setBlockAgainClick] = useState(true);
 
+  // yeni koordinat tanımlama
+  const [nextCoordinateButton, setNextCoordinateButton] = useState(false);
+
   // yanlış seçilen ülkelerin tutulduğu array
   const [falseSelectedCountryArray, setFalseSelectedCountryArray] = useState([]);
 
@@ -66,8 +69,14 @@ function MinimapCountrySelection() {
   const generateNewCoordinate = () => {
     // sokak görünümünü yenile
     dispatch(restartCoordinate());
-  };
 
+    // değişken sıfırlama işlemleri
+    setSelectedCountry(null)
+    setSelectedCountryKey(null)
+    setFalseSelectedCountryArray([]);
+    setBlockAgainClick(false)
+    setNextCoordinateButton(false)
+  };
 
   // Dünya sınırları için
   const wolrdBounds = [
@@ -95,14 +104,8 @@ function MinimapCountrySelection() {
           color: 'black',
           weight: 2,
         })
-        generateNewCoordinate();
-        setTimeout(() => {
-          setSelectedCountry(null)
-          setSelectedCountryKey(null)
-        }, 2000);
-
-        setFalseSelectedCountryArray([]);
-        setBlockAgainClick(false)
+        alert("CORRECT GUESS!");
+        setNextCoordinateButton(true)
       }
       // ülke seçimi hatalı ise
       else {
@@ -117,7 +120,6 @@ function MinimapCountrySelection() {
       }
     }
   };
-
 
   //sokak görünümü hangi ülkenin sınırları içinde
   useEffect(() => {
@@ -199,18 +201,20 @@ function MinimapCountrySelection() {
                 noWrap={true}
                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
               />
-              <GeoJSON
-                data={countryBorder.features}
-                onEachFeature={(feature, layer) => {
-                  layer.on({
-                    click: onCountryClick,
-                  });
-                }}
-                style={{
-                  fillOpacity: 0.0,
-                  weight: 0,
-                }}
-              />
+              {!nextCoordinateButton && (
+                <GeoJSON
+                  data={countryBorder.features}
+                  onEachFeature={(feature, layer) => {
+                    layer.on({
+                      click: onCountryClick,
+                    });
+                  }}
+                  style={{
+                    fillOpacity: 0.0,
+                    weight: 0,
+                  }}
+                />
+              )}
               {selectedCountry && (
                 <GeoJSON
                   key={selectedCountryKey}
@@ -234,13 +238,14 @@ function MinimapCountrySelection() {
               }
             </MapContainer>
             <button
-              onClick={blockAgainClick ? (countryControl) : null}
+              onClick={nextCoordinateButton ? (generateNewCoordinate) : (blockAgainClick ? (countryControl) : null)}
               className={
                 (!blockAgainClick || (selectedCountry === null))
                   ? styles.buttonNoGuess
                   : styles.buttonGuess
               }>
-              "Complete your guess!"
+
+              {nextCoordinateButton ? '"Get New Coordinate"' : '"Complete your guess!"'}
             </button>
           </div>
         ) : (
@@ -266,18 +271,21 @@ function MinimapCountrySelection() {
             noWrap={true}
             url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
           />
-          <GeoJSON
-            data={countryBorder.features}
-            onEachFeature={(feature, layer) => {
-              layer.on({
-                click: onCountryClick,
-              });
-            }}
-            style={{
-              fillOpacity: 0.0,
-              weight: 0,
-            }}
-          />
+          {!nextCoordinateButton && (
+            <GeoJSON
+              data={countryBorder.features}
+              onEachFeature={(feature, layer) => {
+                layer.on({
+                  click: onCountryClick,
+                });
+              }}
+              style={{
+                fillOpacity: 0.0,
+                weight: 0,
+              }}
+            />
+          )}
+
           {selectedCountry && (
             <GeoJSON
               key={selectedCountryKey}
@@ -301,13 +309,14 @@ function MinimapCountrySelection() {
           }
         </MapContainer>
         <button
-          onClick={blockAgainClick ? (countryControl) : null}
+          onClick={nextCoordinateButton ? (generateNewCoordinate) : (blockAgainClick ? (countryControl) : null)}
           className={
             (!blockAgainClick || (selectedCountry === null))
               ? styles.buttonNoGuess
               : styles.buttonGuess
           }>
-          "Complete your guess!"
+
+          {nextCoordinateButton ? '"Get New Coordinate"' : '"Complete your guess!"'}
         </button>
       </div>
     )
