@@ -9,16 +9,20 @@ import { useMediaQuery } from "react-responsive"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { point, booleanPointInPolygon } from "@turf/turf";
-
+import { useParams } from "react-router-dom";
 
 import { restartCoordinate } from "../Redux/MapGameSlices/mapSlice.js";
 import styles from "../styles/mapStyle.module.css";
 import ResultPage from "../pages/resultPages/WhichCountryResultPage";
+import InfoCard from "./UI/WhichCountryModInfoCard"
+
 import "leaflet/dist/leaflet.css";
 
 import countryBorder from "../allCoordinates/countriesborder.json"
 
+
 function MinimapCountrySelection() {
+  const { countryName } = useParams();
   const [result, setResultPage] = useState(false);
 
   // mobil ekran mı bunun kontrolü için değişkenler
@@ -38,10 +42,6 @@ function MinimapCountrySelection() {
       setResultPage(true);
     }
   }, [remaingGuessNumber])
-  useEffect(() => {
-    console.log(trueGuessNumber)
-  }, [trueGuessNumber])
-
 
   const data = useSelector((state) => state.mapSlc.coordinate);
 
@@ -172,6 +172,7 @@ function MinimapCountrySelection() {
     isMobile ? (
       //telefon ise 
       <>
+        <InfoCard countryName={countryName} trueGuessNumber={trueGuessNumber} remaingGuessNumber={remaingGuessNumber} />
         <div
           style={{
             position: "absolute",
@@ -259,72 +260,75 @@ function MinimapCountrySelection() {
         )}
       </>
     ) : (
-      <div
-        className={styles.mainContainer}
-        style={{ color: "black", fontSize: 24 }}>
-        <MapContainer
-          className={styles.mapContainer}
-          center={center}
-          zoom={5}
-          scrollWheelZoom={true}
-          zoomControl={false}
-          maxBounds={wolrdBounds}
-          maxBoundsViscosity={1.0}
-          minZoom={2}
-          maxZoom={18}
-        >
-          <TileLayer
-            noWrap={true}
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
-          />
-          {!nextCoordinateButton && (
-            <GeoJSON
-              data={countryBorder.features}
-              onEachFeature={(feature, layer) => {
-                layer.on({
-                  click: onCountryClick,
-                });
-              }}
-              style={{
-                fillOpacity: 0.0,
-                weight: 0,
-              }}
+      <>
+        <InfoCard countryName={countryName} trueGuessNumber={trueGuessNumber} remaingGuessNumber={remaingGuessNumber} />
+        <div
+          className={styles.mainContainer}
+          style={{ color: "black", fontSize: 24 }}>
+          <MapContainer
+            className={styles.mapContainer}
+            center={center}
+            zoom={5}
+            scrollWheelZoom={true}
+            zoomControl={false}
+            maxBounds={wolrdBounds}
+            maxBoundsViscosity={1.0}
+            minZoom={2}
+            maxZoom={18}
+          >
+            <TileLayer
+              noWrap={true}
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
             />
-          )}
-
-          {selectedCountry && (
-            <GeoJSON
-              key={selectedCountryKey}
-              data={selectedCountry}
-              style={selectedCountryColor}
-            />
-          )}
-          {
-            falseSelectedCountryArray.map((falseCountryKey) => (
+            {!nextCoordinateButton && (
               <GeoJSON
-                key={falseCountryKey}
-                data={countryBorder.features.find(feature => feature.properties.ISO_A3 === falseCountryKey)}
+                data={countryBorder.features}
+                onEachFeature={(feature, layer) => {
+                  layer.on({
+                    click: onCountryClick,
+                  });
+                }}
                 style={{
-                  fillColor: 'red',
-                  fillOpacity: 0.5,
-                  color: 'black',
-                  weight: 2,
+                  fillOpacity: 0.0,
+                  weight: 0,
                 }}
               />
-            ))
-          }
-        </MapContainer>
-        <button
-          onClick={nextCoordinateButton ? (generateNewCoordinate) : (blockAgainClick ? (countryControl) : null)}
-          className={
-            (!blockAgainClick || (selectedCountry === null))
-              ? styles.buttonNoGuess
-              : styles.buttonGuess
-          }>
+            )}
 
-          {nextCoordinateButton ? '"Get New Coordinate"' : '"Complete your guess!"'}
-        </button>
-      </div>
+            {selectedCountry && (
+              <GeoJSON
+                key={selectedCountryKey}
+                data={selectedCountry}
+                style={selectedCountryColor}
+              />
+            )}
+            {
+              falseSelectedCountryArray.map((falseCountryKey) => (
+                <GeoJSON
+                  key={falseCountryKey}
+                  data={countryBorder.features.find(feature => feature.properties.ISO_A3 === falseCountryKey)}
+                  style={{
+                    fillColor: 'red',
+                    fillOpacity: 0.5,
+                    color: 'black',
+                    weight: 2,
+                  }}
+                />
+              ))
+            }
+          </MapContainer>
+          <button
+            onClick={nextCoordinateButton ? (generateNewCoordinate) : (blockAgainClick ? (countryControl) : null)}
+            className={
+              (!blockAgainClick || (selectedCountry === null))
+                ? styles.buttonNoGuess
+                : styles.buttonGuess
+            }>
+
+            {nextCoordinateButton ? '"Get New Coordinate"' : '"Complete your guess!"'}
+          </button>
+        </div>
+      </>
     )
   );
 }

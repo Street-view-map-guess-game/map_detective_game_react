@@ -10,7 +10,6 @@ import {
   StoreCountryName,
   restartGame,
 } from "../Redux/MapGameSlices/gameSlice";
-import InfoCard from "./UI/gameInfoCard";
 
 const apiKey = "AIzaSyCAP_o89z3Ner51DPnCsvZDC7y7f-jJ41A";
 
@@ -135,7 +134,6 @@ function StreetView({ countryName }) {
       ) : (
         <Loadingpage />
       )}
-      <InfoCard countryName={countryName}/>
     </>
   );
 }

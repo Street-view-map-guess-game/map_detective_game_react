@@ -11,12 +11,15 @@ import L from "leaflet";
 import { useMediaQuery } from "react-responsive"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from "react-router-dom";
 
 import { setScore } from "../gameFunctions/gameFunctions";
 import styles from "../styles/mapStyle.module.css";
 import { findDistance } from "../mapFunctions/mapFunctions";
 import ResultPage from "../pages/resultPages/DistanceResultPage";
 import guessMarker from "../assets/images/pageImage/markers/guessMarker.gif";
+import InfoCard from "./UI/DistanceGameModInfoCard"
+
 import "leaflet/dist/leaflet.css";
 
 function Map() {
@@ -30,6 +33,7 @@ function Map() {
   const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
   const [mobileMapButton, setmobileMapButton] = useState(false);
 
+  const { countryName } = useParams();
 
   // Dünya sınırları için
   const wolrdBounds = [
@@ -80,6 +84,7 @@ function Map() {
     isMobile ? (
       //telefon ise 
       <>
+        <InfoCard countryName={countryName} />
         <div
           style={{
             position: "absolute",
@@ -140,44 +145,47 @@ function Map() {
         )}
       </>
     ) : (
-      <div
-        className={styles.mainContainer}
-        style={{ color: "black", fontSize: 24 }}>
-        <MapContainer
-          className={styles.mapContainer}
-          center={center}
-          zoom={5}
-          scrollWheelZoom={true}
-          zoomControl={false}
-          maxBounds={wolrdBounds}
-          maxBoundsViscosity={1.0}
-          minZoom={2}
-          maxZoom={18}
-        >
-          <TileLayer
-            noWrap={true}
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
-          />
-          {guess.lat === "" || guess.lng === "" ? (
-            ""
-          ) : (
-            <Marker position={guess} icon={icon}>
-              <Popup>Your Guess</Popup>
-            </Marker>
-          )}
+      <>
+        <InfoCard countryName={countryName} />
+        <div
+          className={styles.mainContainer}
+          style={{ color: "black", fontSize: 24 }}>
+          <MapContainer
+            className={styles.mapContainer}
+            center={center}
+            zoom={5}
+            scrollWheelZoom={true}
+            zoomControl={false}
+            maxBounds={wolrdBounds}
+            maxBoundsViscosity={1.0}
+            minZoom={2}
+            maxZoom={18}
+          >
+            <TileLayer
+              noWrap={true}
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
+            />
+            {guess.lat === "" || guess.lng === "" ? (
+              ""
+            ) : (
+              <Marker position={guess} icon={icon}>
+                <Popup>Your Guess</Popup>
+              </Marker>
+            )}
 
-          <MapEvents></MapEvents>
-        </MapContainer>
-        <button
-          onClick={calculateDistanceNScore}
-          className={
-            guess.lat === "" || guess.lng === ""
-              ? styles.buttonNoGuess
-              : styles.buttonGuess
-          }>
-          "Complete your guess!"
-        </button>
-      </div>
+            <MapEvents></MapEvents>
+          </MapContainer>
+          <button
+            onClick={calculateDistanceNScore}
+            className={
+              guess.lat === "" || guess.lng === ""
+                ? styles.buttonNoGuess
+                : styles.buttonGuess
+            }>
+            "Complete your guess!"
+          </button>
+        </div>
+      </>
     )
   );
 }
