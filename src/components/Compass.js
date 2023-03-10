@@ -79,7 +79,7 @@ function Compass({ panorama }) {
         <div
             style={{
                 position: "absolute",
-                top: 25,
+                top: 80,
                 right: 25,
                 fontSize: 80,
             }}

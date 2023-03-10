@@ -95,7 +95,7 @@ function Map() {
           }}
           onClick={() => setmobileMapButton(!mobileMapButton)}
         >
-          <div style={{ width: "80px", height: "80px", borderRadius: "50%", backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div style={{ width: "80px", height: "80px", borderRadius: "50%", backgroundColor: mobileMapButton ? "rgba(255, 0, 0, 0.7)" : "rgba(0, 255, 0, 0.7)", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <FontAwesomeIcon icon={faMapMarkedAlt} style={{ color: "#fff", fontSize: "40px" }} />
           </div>
         </div>
