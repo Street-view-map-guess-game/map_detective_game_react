@@ -1,3 +1,8 @@
+/* kullanıcının textleri seçmesini engellemek için */
+* {
+  user-select: none;
+}
+
 .mainContainer {
   position: absolute;
   z-index: 1000;
@@ -17,6 +22,7 @@
   /* transition: 0.4s;
   transition-delay: 1s; */
 }
+
 /* hover render edilmede sıkıntı çıkardığı için kaldırıldı */
 /* .mapContainer:hover {
   height: 300px;

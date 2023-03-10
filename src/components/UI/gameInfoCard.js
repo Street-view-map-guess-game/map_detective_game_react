@@ -17,7 +17,7 @@ function InfoCard({ countryName }) {
             <div className="flex justify-start ml-6 mt-10 text-white text-2xl">
                 <div
                     className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 shadow-lg rounded-md border-2 border-white text-center"
-                    style={{ zIndex: 9, userSelect: "none" }}>
+                    style={{ zIndex: 9 }}>
                     <div>
                         Round
                         <span className={styles.counterVal}>
@@ -44,7 +44,7 @@ function InfoCard({ countryName }) {
             <div className="flex justify-start ml-6 mt-10 text-white text-2xl">
                 <div
                     className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 shadow-lg rounded-md border-2 border-white text-center"
-                    style={{ zIndex: 9, userSelect: "none" }}>
+                    style={{ zIndex: 9 }}>
                     <div>Country
                         <span className={styles.counterVal}><br />{countryName.charAt(0).toUpperCase() + countryName.slice(1)}</span>
                     </div>

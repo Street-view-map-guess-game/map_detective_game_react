@@ -5,6 +5,7 @@
     height: 100%;
     width: 100%;
 }
+
 .mapdiv {
     position: absolute;
     z-index: 1000;
