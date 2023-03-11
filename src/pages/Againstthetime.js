@@ -23,13 +23,15 @@ export default function Againstthetime() {
   const [sonuc, setsonuc] = useState(0)
   const [showresult, setshowresult] = useState(true)
 
+  
   const { countryName } = useParams();
 
+  // ses tanımlamaları
+  const alarmAudio = new Audio(alarm);
+  alarmAudio.volume = 0.2;
+
   useEffect(() => {
-
-
     const time = setInterval(() => {
-
       if (timer1 > 1) {
         ilksayac()
       } else {
@@ -42,20 +44,16 @@ export default function Againstthetime() {
         dispatch(setagaintimescore(0))
         dispatch(againsttimeguess(0))
         setround(round + 1)
-
       }
       if (round === 5) {
         setsonuc(1)
-
       }
-
       if (isshow === true) {
         ikisayac()
-        if(timer2 === 5){
-          const audio = new Audio(alarm);
-          audio.play();
-        }
+        if (timer2 === 5) {
 
+          alarmAudio.play();
+        }
         if (timer2 === 0) {
           console.log('see you later')
           dispatch(startthegametime())
@@ -66,41 +64,24 @@ export default function Againstthetime() {
           } else {
             settimer3(10)
           }
-
         }
-
-
       }
       addtime()
-
     }, 1000);
-
     return () => clearInterval(time)
   })
 
   const addtime = () => {
-
     settimer(timer + 1)
-
-
   }
   const ilksayac = () => {
-
     settimer1(timer1 - 1)
-
-
   }
   const ikisayac = () => {
-
     settimer2(timer2 - 1)
-
-
   }
   const ucsayac = () => {
-
     settimer3(timer3 - 1)
-
-
   }
 
   return (
