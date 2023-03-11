@@ -2,6 +2,7 @@ import Card from "../card/gameModCard";
 import Header from "../components/Header";
 import whichcountrymod from "../assets/images/pageImage/gamemodeimages/countryselectionmode.png";
 import distancemod from "../assets/images/pageImage/gamemodeimages/distancemode.png";
+import timemod from "../assets/images/pageImage/gamemodeimages/fortimemod.png";
 
 function GameModeSelectionPage() {
     return (
@@ -25,7 +26,7 @@ function GameModeSelectionPage() {
                     />
                     <Card
                         title="Against Mod"
-                        imageUrl={distancemod}
+                        imageUrl={timemod}
                         imageAlt="distancemodimage"
                         description="Continue with Against the time Mod"
                         gameMod="against"

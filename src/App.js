@@ -8,6 +8,7 @@ import Protected from "./components/Protected";
 import FirstPage from "./pages/FirstPage";
 import GameModSelectionPage from "./pages/GameModSelectionPage";
 
+
 function App() {
   return (
     <AuthContextProvider>
