@@ -140,22 +140,34 @@ function AgainstResultPage({ score, guess, sonuc }) {
           <Marker position={data} icon={realCoorMarker}>
             <Popup>Real Coordinate</Popup>
           </Marker>
-        </MapContainer></>) : (<><h1 className="mapStyle_counterVal__vw7ds" style={{}}>!</h1><h1 className="mapStyle_counterVal__vw7ds" style={{ marginBottom: "4rem", fontSize: "4rem" }}>please pick the map </h1></>)}
+        </MapContainer></>
+        ) : (
+          <>
+            <h1 className={styles.counterVal} style={{}}>
+              !
+            </h1>
+            <h1 className={styles.counterVal} style={{ marginBottom: "4rem", fontSize: "4rem" }}>
+              please pick the map
+            </h1>
+          </>
+        )}
         <div className="scores mt-2 flex justify-between basis-2/5 text-white text-2xl">
-          <><div className="roundScore">
-            Round Score: <Counter end={score}></Counter>{" "}
-          </div>
+          <>
+            <div className="roundScore">
+              Round Score: <Counter end={score}></Counter>{" "}
+            </div>
             <div className="totalScore">
               Total Score:{" "}
               <Counter start={totalScore} end={totalScore + score}></Counter>
-            </div></>
+            </div>
+          </>
         </div>
       </div>
 
       {sonuc !== 0 ? (<div>
 
 
-        <h1 className="mapStyle_counterVal__vw7ds">
+        <h1 className={styles.counterVal}>
           game over !
         </h1>
 
@@ -168,16 +180,17 @@ function AgainstResultPage({ score, guess, sonuc }) {
               <svg className="w-5 h-5" fill="none" stroke="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </span>
             <span className="relative">go to menu</span>
-
-
-
           </button>
         </div>
 
-
-
-      </div>) : (<div> <h1 className="mapStyle_counterVal__vw7ds">{time}</h1></div>)}
-
+      </div>
+      ) : (
+        <div>
+          <h1 className={styles.counterVal}>
+            {time}
+          </h1>
+        </div>
+      )}
 
     </div>
   );
