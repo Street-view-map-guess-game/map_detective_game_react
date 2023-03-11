@@ -26,11 +26,13 @@ function Maptime() {
   const doneGuessData = useSelector((state) => state.mapSlc.isGuessed);
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [guess, setGuess] = useState({ lat: "", lng: "" });
+
   const dispatch = useDispatch()
 
   const isMobileHeight = useMediaQuery({ maxHeight: 600 });
   const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
   const [mobileMapButton, setmobileMapButton] = useState(false);
+
 
 
   // Dünya sınırları için

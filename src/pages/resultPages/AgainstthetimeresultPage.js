@@ -31,11 +31,6 @@ function AgainstResultPage({ score, guess, sonuc }) {
   const isshow = useSelector((state) => state.gmSlc.gamestarttime);
   const [time, settime] = useState(10);
 
-  const icon = L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
-    iconAnchor: [12, 41], // adjust the anchor point to position the icon above the clicked location
-  });
-
   const wolrdBounds = [
     [-90, -180],
     [90, 180],
@@ -171,9 +166,8 @@ function AgainstResultPage({ score, guess, sonuc }) {
 
       {sonuc !== 0 ? (
         <div>
-          <h1 className={styles.counterVal}>game over !</h1>
-
           <div className="text-center">
+            <h1 className={styles.counterVal}>game over !</h1>
             <button
               className="   relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-yellow-300 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"
               onClick={() => {

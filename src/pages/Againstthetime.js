@@ -17,13 +17,13 @@ export default function Againstthetime() {
   const score = useSelector((state) => state.mapSlc.againsttimescore);
   const [timer, settimer] = useState(0)
   const [timer1, settimer1] = useState(5)
-  const [timer2, settimer2] = useState(30)
+  var [timer2, settimer2] = useState(30)
   const [timer3, settimer3] = useState(100)
   const [round, setround] = useState(0)
   const [sonuc, setsonuc] = useState(0)
   const [showresult, setshowresult] = useState(true)
 
-  
+
   const { countryName } = useParams();
 
   // ses tanımlamaları
@@ -51,7 +51,6 @@ export default function Againstthetime() {
       if (isshow === true) {
         ikisayac()
         if (timer2 === 5) {
-
           alarmAudio.play();
         }
         if (timer2 === 0) {
@@ -70,6 +69,12 @@ export default function Againstthetime() {
     }, 1000);
     return () => clearInterval(time)
   })
+
+  // kullanıcı girdi girince zamanlayıcıyı sıfırlar
+  useEffect(() => {
+    timer2 = 0;
+  }, [guess])
+
 
   const addtime = () => {
     settimer(timer + 1)

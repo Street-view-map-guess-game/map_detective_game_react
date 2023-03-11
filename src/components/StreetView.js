@@ -76,20 +76,23 @@ function StreetView({ countryName }) {
           panorama,
           "status_changed",
           function () {
-            //bunu anca settimeout ile yapabildim
             setTimeout(() => {
               const developmentDiv = [...document.querySelectorAll("div")].find(
                 (el) => el.textContent === "For development purposes only"
               );
-              developmentDiv.remove();
-              const developmentDiv2 = [
-                ...document.querySelectorAll("div"),
-              ].find(
-                (el) =>
-                  el.textContent ===
-                  "This page can't load Google Maps correctly."
-              ).parentElement;
-              developmentDiv2.remove();
+              if (developmentDiv) {
+                developmentDiv.remove();
+              }
+              const developmentDiv2 = [...document.querySelectorAll("div")]
+                .find(
+                  (el) =>
+                    el.textContent ===
+                    "This page can't load Google Maps correctly."
+                );
+              if (developmentDiv2) {
+                const parentElement = developmentDiv2.parentElement;
+                parentElement.remove();
+              }
             }, 1000);
 
             // tıklanabilir linkleri silen kod parçası
