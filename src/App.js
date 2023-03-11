@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Auth } from "firebase/auth";
 import "./App.css";
 import GamePage from "./pages/GamePage";
 import CountrySelectionPage from "./pages/CountrySelectionPage";
@@ -8,7 +7,6 @@ import ConnectToAccountPage from "./pages/ConnectToAccountPage";
 import Protected from "./components/Protected";
 import FirstPage from "./pages/FirstPage";
 import GameModSelectionPage from "./pages/GameModSelectionPage";
-import Againstthetime from "./pages/Againstthetime";
 
 function App() {
   return (
