@@ -19,7 +19,7 @@ export default function Againstthetime() {
   const score = useSelector((state) => state.mapSlc.againsttimescore);
   const [timer, settimer] = useState(0)
   const [timer1, settimer1] = useState(5)
-  const [timer2, settimer2] = useState(60)
+  const [timer2, settimer2] = useState(20)
   const [timer3, settimer3] = useState(100)
   const [round, setround] = useState(0)
   const [sonuc, setsonuc] = useState(0)
