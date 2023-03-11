@@ -1,11 +1,11 @@
 import React from "react";
 
 import StreetView from "../components/StreetView";
-import Map from "../components/MiniMap";
+import Map from "../components/minimaps/MiniMap";
 import { useParams } from "react-router-dom";
 import allcoordinates from "../allCoordinates/coordinates.json";
 import FailPages from "../pages/PageIsNotAvailable.js"
-import MinimapCountrySelection from "../components/MinimapforCountrySelec.js"
+import MinimapCountrySelection from "../components/minimaps/MinimapforCountrySelec.js"
 import Againstthetime from "./Againstthetime";
 
 function GamePage() {

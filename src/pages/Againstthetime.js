@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Map from '../components/MiniMap'
+import Map from '../components/minimaps/MiniMap'
 import StreetView from '../components/StreetView'
 import { useDispatch, useSelector } from 'react-redux'
 import { calculateTotalScore, increaseNumberOfRounds } from '../Redux/MapGameSlices/gameSlice'
 import { restartCoordinate, openCloseResultPage } from '../Redux/MapGameSlices/mapSlice'
 import { startthegametime } from '../Redux/MapGameSlices/gameSlice'
-import Maptime from '../components/MiniMapfortimemod'
+import Maptime from '../components/minimaps/MiniMapfortimemod'
 import AgainstResultPage from './resultPages/AgainstthetimeresultPage'
 import { setagaintimescore, againsttimeguess } from '../Redux/MapGameSlices/mapSlice'
 import { useParams } from "react-router-dom";

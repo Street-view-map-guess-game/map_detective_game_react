@@ -11,14 +11,14 @@ import { faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { point, booleanPointInPolygon } from "@turf/turf";
 import { useParams } from "react-router-dom";
 
-import { restartCoordinate } from "../Redux/MapGameSlices/mapSlice.js";
-import styles from "../styles/mapStyle.module.css";
-import ResultPage from "../pages/resultPages/WhichCountryResultPage";
-import InfoCard from "./UI/WhichCountryModInfoCard"
+import { restartCoordinate } from "../../Redux/MapGameSlices/mapSlice.js";
+import styles from "../../styles/mapStyle.module.css";
+import ResultPage from "../../pages/resultPages/WhichCountryResultPage";
+import InfoCard from "../UI/WhichCountryModInfoCard"
 
 import "leaflet/dist/leaflet.css";
 
-import countryBorder from "../allCoordinates/countriesborder.json"
+import countryBorder from "../../allCoordinates/countriesborder.json"
 
 
 function MinimapCountrySelection() {
