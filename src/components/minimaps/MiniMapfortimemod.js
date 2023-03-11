@@ -26,10 +26,11 @@ function Maptime() {
   const doneGuessData = useSelector((state) => state.mapSlc.isGuessed);
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [guess, setGuess] = useState({ lat: "", lng: "" });
-  const [result, setResultPage] = useState(false);
-  const [roundScore, setroundScore] = useState(0.0);
   const dispatch = useDispatch()
 
+  const isMobileHeight = useMediaQuery({ maxHeight: 600 });
+  const isMobile = useMediaQuery({ maxWidth: 600 }) || isMobileHeight;
+  const [mobileMapButton, setmobileMapButton] = useState(false);
 
 
   // Dünya sınırları için
@@ -50,10 +51,8 @@ function Maptime() {
     } else {
       const distance = findDistance(data, guess);
       const score = parseFloat(setScore(distance));
-      setroundScore(score);
       dispatch(setagaintimescore(score))
-      dispatch(againsttimeguess(guess))
-      setResultPage(true);
+      dispatch(againsttimeguess({ lat: guess.lat, lng: guess.lng }))
       const audio = new Audio(pickingvoice);
       audio.play();
 
@@ -66,7 +65,6 @@ function Maptime() {
   };
 
   useEffect(() => {
-    setResultPage(false);
     setGuess({ lat: "", lng: "" });
   }, [doneGuessData]);
 
@@ -80,9 +78,6 @@ function Maptime() {
     });
     return null;
   }
-
-  const isMobile = useMediaQuery({ maxWidth: 700 });
-  const [mobileMapButton, setmobileMapButton] = useState(false);
 
   return (
     isMobile ? (
@@ -98,7 +93,7 @@ function Maptime() {
           }}
           onClick={() => setmobileMapButton(!mobileMapButton)}
         >
-          <div style={{ width: "80px", height: "80px", borderRadius: "50%", backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div style={{ width: "80px", height: "80px", borderRadius: "50%", backgroundColor: mobileMapButton ? "rgba(255, 0, 0, 0.7)" : "rgba(0, 255, 0, 0.7)", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <FontAwesomeIcon icon={faMapMarkedAlt} style={{ color: "#fff", fontSize: "40px" }} />
           </div>
         </div>
@@ -109,7 +104,7 @@ function Maptime() {
             style={{ color: "black", fontSize: 24 }}>
             <MapContainer
               className={styles.mobileMapContainer}
-              style={{ width: window.innerWidth }}
+              style={{ width: isMobileHeight ? window.innerHeight : window.innerWidth, height: isMobileHeight ? window.innerHeight / 2.5 : window.innerWidth / 2 }}
               center={center}
               zoom={5}
               scrollWheelZoom={true}
@@ -183,7 +178,7 @@ function Maptime() {
               ? styles.buttonNoGuess
               : styles.buttonGuess
           }>
-          "pick the map!"
+          "Complete your guess!"
         </button>
       </div>
     )

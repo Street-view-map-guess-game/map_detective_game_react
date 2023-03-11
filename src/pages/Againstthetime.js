@@ -51,7 +51,7 @@ export default function Againstthetime() {
 
       if (isshow === true) {
         ikisayac()
-        if(timer2 === 4){
+        if(timer2 === 5){
           const audio = new Audio(alarm);
           audio.play();
         }
