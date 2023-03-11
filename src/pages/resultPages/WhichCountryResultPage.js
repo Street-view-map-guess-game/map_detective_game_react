@@ -90,7 +90,11 @@ function WhichCountryResultPage({ score, falseCountryArray, realCountry, realCou
             <div className="mt-0">
                 <button
                     onClick={startNewGame}
-                    className={styles.bttnNewGuess}>
+                    className={styles.bttnNewGuess}
+                    style={{
+                        display: "flex",
+                    }}
+                    >
                     Start New Game
                 </button>
             </div>

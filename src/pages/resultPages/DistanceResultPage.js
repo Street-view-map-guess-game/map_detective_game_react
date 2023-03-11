@@ -143,7 +143,11 @@ function DistanceResultPage({ score, guess }) {
       <div className="mt-0 ">
         <button
           onClick={isGameOver ? startNewGame : generateNewCoordinate}
-          className={styles.bttnNewGuess}>
+          className={styles.bttnNewGuess}
+          style={{
+            display: "flex",
+          }}
+        >
           {isGameOver ? "Start New Game" : "New Guess"}
         </button>
       </div>
