@@ -19,7 +19,7 @@ export default function Againstthetime() {
   const score = useSelector((state) => state.mapSlc.againsttimescore);
   const [timer, settimer] = useState(0)
   const [timer1, settimer1] = useState(5)
-  const [timer2, settimer2] = useState(5)
+  const [timer2, settimer2] = useState(20)
   const [timer3, settimer3] = useState(100)
   const [round, setround] = useState(0)
   const [sonuc, setsonuc] = useState(0)
@@ -103,14 +103,27 @@ export default function Againstthetime() {
 
   return (
     <div>
-      {starting ? (<>{showresult ? (<div>  <Maptime></Maptime>
-        <StreetView countryName={countryName} />{isshow ? (<div className='flex items-center justify-center'><h1 className='absolute top-0 text-5xl mapStyle_counterVal__vw7ds' style={{ height: "30px" }} >
-          {timer2}</h1></div>) : (<></>)} </div>) : (<>
-            <AgainstResultPage score={score} guess={guess} sonuc={sonuc} ></AgainstResultPage>
-          </>)}</>) :
-
-        (<div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex justify-center items-center"><p className='  mapStyle_counterVal__vw7ds' style={{ fontSize: "15rem" }}>{timer1}</p></div>)}
-
+      {starting ? (
+        <>
+          {showresult ? (
+            <div>
+              <Maptime></Maptime>
+              <StreetView countryName={countryName} />
+              {isshow ? (
+                <div className='flex items-center justify-center'><h1 className='absolute top-0 text-5xl mapStyle_counterVal__vw7ds' style={{ height: "30px" }} >
+                  {timer2}</h1></div>
+              ) : (
+                <></>
+              )}
+            </div>
+          ) : (
+            <>
+              <AgainstResultPage score={score} guess={guess} sonuc={sonuc} ></AgainstResultPage>
+            </>
+          )}
+        </>
+      ) : (
+        <div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex justify-center items-center"><p className='  mapStyle_counterVal__vw7ds' style={{ fontSize: "15rem" }}>{timer1}</p></div>)}
     </div>
   )
 }
