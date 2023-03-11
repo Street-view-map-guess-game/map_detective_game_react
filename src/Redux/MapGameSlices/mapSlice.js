@@ -6,6 +6,8 @@ export const mapSlice = createSlice({
     coordinate: { lat: 0, lng: 0 },
     isRestarted: false,
     isGuessed: false,
+    againsttimescore:0,
+    guess:0,
   },
   reducers: {
     storeCoordinate: {
@@ -23,9 +25,20 @@ export const mapSlice = createSlice({
         state.isGuessed = !state.isGuessed;
       },
     },
+    setagaintimescore: {
+      reducer: (state, action) => {
+        state.againsttimescore = action.payload;
+      },
+    },
+    againsttimeguess: {
+      reducer: (state, action) => {
+        state.guess = action.payload;
+      },
+    },
+
   },
 });
 
-export const { storeCoordinate, restartCoordinate, openCloseResultPage } =
+export const { storeCoordinate, restartCoordinate, openCloseResultPage ,setagaintimescore,againsttimeguess } =
   mapSlice.actions;
 export default mapSlice.reducer;

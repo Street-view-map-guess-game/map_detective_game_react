@@ -6,6 +6,7 @@ export const gameSlice = createSlice({
     totalScore: 0,
     numOfRound: 0,
     countryName: "",
+    gamestarttime:false,
   },
   reducers: {
     calculateTotalScore: {
@@ -29,6 +30,11 @@ export const gameSlice = createSlice({
         state.countryName = action.payload;
       },
     },
+    startthegametime:{
+      reducer: (state, action) => { 
+        state.gamestarttime= !state.gamestarttime;
+      }
+    }
   },
 });
 
@@ -37,5 +43,6 @@ export const {
   increaseNumberOfRounds,
   restartGame,
   StoreCountryName,
+  startthegametime,
 } = gameSlice.actions;
 export default gameSlice.reducer;

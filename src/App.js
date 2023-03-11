@@ -8,6 +8,7 @@ import ConnectToAccountPage from "./pages/ConnectToAccountPage";
 import Protected from "./components/Protected";
 import FirstPage from "./pages/FirstPage";
 import GameModSelectionPage from "./pages/GameModSelectionPage";
+import Againstthetime from "./pages/Againstthetime";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<FirstPage></FirstPage>}></Route>
+          
           <Route path="/connectaccount" element={<ConnectToAccountPage></ConnectToAccountPage>}></Route>
           <Route path="/gamemodpage" element={<Protected><GameModSelectionPage /></Protected>}></Route>
           <Route exact path="?/:gameMod/countryselection" element={<Protected><CountrySelectionPage /></Protected>}></Route>

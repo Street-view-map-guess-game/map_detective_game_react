@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import allcoordinates from "../allCoordinates/coordinates.json";
 import FailPages from "../pages/PageIsNotAvailable.js"
 import MinimapCountrySelection from "../components/MinimapforCountrySelec.js"
+import Againstthetime from "./Againstthetime";
 
 function GamePage() {
   const { countryName } = useParams();
@@ -37,6 +38,12 @@ function GamePage() {
           <StreetView countryName={countryName} />
         </div>
       );
+    }
+    else if (gameMod === "against"){
+      document.title = countryName.toUpperCase() + " - Against Mod - Map Detective";
+      return (
+        <div> <Againstthetime></Againstthetime></div>
+      )
     }
     else {
       document.title = "Page Is Not Available - Map Detective";

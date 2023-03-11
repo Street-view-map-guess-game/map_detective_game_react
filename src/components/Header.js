@@ -20,7 +20,7 @@ function Header() {
         <div className="w-24 flex">
           <img
             className="absolute top-5 left-5 opacity-80"
-            width="200"
+            width="150"
             src={whiteLogo}
             alt="logo"></img>
         </div>

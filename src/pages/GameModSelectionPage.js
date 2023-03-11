@@ -23,6 +23,13 @@ function GameModeSelectionPage() {
                         description="Continue with Distance Mod"
                         gameMod="distancemod"
                     />
+                    <Card
+                        title="Against Mod"
+                        imageUrl={distancemod}
+                        imageAlt="distancemodimage"
+                        description="Continue with Against the time Mod"
+                        gameMod="against"
+                    />
                 </div>
             </div>
         </div>

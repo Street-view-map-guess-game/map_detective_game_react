@@ -6,6 +6,7 @@ import { storeCoordinate } from "../Redux/MapGameSlices/mapSlice";
 import Loadingpage from "../pages/LoadingPage";
 import { getRandomCoordinate } from "../mapFunctions/mapFunctions";
 import Compass from "./Compass.js";
+import { startthegametime } from "../Redux/MapGameSlices/gameSlice";
 import {
   StoreCountryName,
   restartGame,
@@ -44,6 +45,7 @@ function StreetView({ countryName }) {
       if (regex.test(data.copyright)) {
         //sokak görünümü yüklendi
         setStreetViewIsLoaded(true);
+        dispatch(startthegametime())
 
         // sokak görünümü için tanımlamalar
         const panorama = new window.google.maps.StreetViewPanorama(
