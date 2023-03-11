@@ -6,7 +6,7 @@ import Maptime from '../components/minimaps/MiniMapfortimemod'
 import AgainstResultPage from './resultPages/AgainstthetimeresultPage'
 import { setagaintimescore, againsttimeguess } from '../Redux/MapGameSlices/mapSlice'
 import { useParams } from "react-router-dom";
-
+import alarm from "../assets/voices/alarm.mp3"
 import styles from "../styles/mapStyle.module.css";
 
 export default function Againstthetime() {
@@ -17,7 +17,7 @@ export default function Againstthetime() {
   const score = useSelector((state) => state.mapSlc.againsttimescore);
   const [timer, settimer] = useState(0)
   const [timer1, settimer1] = useState(5)
-  const [timer2, settimer2] = useState(20)
+  const [timer2, settimer2] = useState(30)
   const [timer3, settimer3] = useState(100)
   const [round, setround] = useState(0)
   const [sonuc, setsonuc] = useState(0)
@@ -38,7 +38,7 @@ export default function Againstthetime() {
       ucsayac()
       if (timer3 === 0) {
         setshowresult(true)
-        settimer2(20)
+        settimer2(30)
         dispatch(setagaintimescore(0))
         dispatch(againsttimeguess(0))
         setround(round + 1)
@@ -51,6 +51,10 @@ export default function Againstthetime() {
 
       if (isshow === true) {
         ikisayac()
+        if(timer2 === 4){
+          const audio = new Audio(alarm);
+          audio.play();
+        }
 
         if (timer2 === 0) {
           console.log('see you later')
@@ -119,7 +123,7 @@ export default function Againstthetime() {
                     </defs>
                     <circle cx="50" cy="50" r="40" fill="none" strokeWidth="10" stroke="#cccccc" />
                     <circle cx="50" cy="50" r="40" fill="none" strokeWidth="10" stroke="url(#gradient)"
-                      strokeDasharray={2 * Math.PI * 40} strokeDashoffset={2 * Math.PI * 40 * (1 - timer2 / 20)} />
+                      strokeDasharray={2 * Math.PI * 40} strokeDashoffset={2 * Math.PI * 40 * (1 - timer2 / 30)} />
                     <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" className={styles.counterVal} style={{ fontSize: "30px" }}>
                       {timer2}
                     </text>
