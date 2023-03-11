@@ -29,7 +29,6 @@ function DistanceResultPage({ score, guess }) {
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [isGameOver, setIsGameOver] = useState(false);
 
-
   const userMarker = L.icon({
     iconUrl: userGuessMarker,
     iconSize: [50, 50],
@@ -92,14 +91,16 @@ function DistanceResultPage({ score, guess }) {
         zIndex: 10,
         fontSize: 80,
       }}>
-      <div className="-mt-24 sm:mt-0 text-center">
+      <div className="-mt-24 md:mt-10 lg:mt-10 sm:mt-0 text-center">
         {isGameOver ? (
           <div className="text-6xl text-white font-bold mb-5">Game is Over</div>
         ) : (
           ""
         )}
         <MapContainer
-          className={"w-148 h-122 sm:w-screen sm:h-64 rounded "}
+          className={
+            "w-148 h-122 md:w-136 md:h-44 lg:w-136 lg:h-44  sm:w-screen sm:h-64 rounded "
+          }
           center={center}
           zoom={2}
           scrollWheelZoom={true}
