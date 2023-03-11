@@ -122,6 +122,93 @@ function CountrySelectionPage() {
       </div>
     )
   }
+  else if (gameMod === "against") {
+    return (
+      <div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex  justify-center items-center">
+        <Header></Header>
+        <div className="flex space-y-6 flex-col sm:space-x-0 sm:space-y-8 sm:pt-8 sm:pb-8 mt-32 mb-24 ">
+          <div className="flex space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8 ">
+            <Card
+              title="TURKEY"
+              imageUrl={maiden_tower}
+              imageAlt="Maiden's Tower"
+              description="Continue with TURKEY"
+              countryName="turkey"
+              gameMod={"against"}
+            />
+            <Card
+              title="FRANCE"
+              imageUrl={eiffel_tower}
+              imageAlt="Eiffel Tower"
+              description="Continue with FRANCE"
+              countryName="france"
+              gameMod={"against"}
+            />
+            <Card
+              title="SPAIN"
+              imageUrl={la_sagrada_familia}
+              imageAlt="La Sagrada Familia"
+              description="Continue with SPAIN"
+              countryName="spain"
+              gameMod={"against"}
+            />
+          </div>
+          <div className="flex  space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8">
+            <Card
+              title="ITALY"
+              imageUrl={pisa_tower}
+              imageAlt="Pisa Tower"
+              description="Continue with ITALY"
+              countryName="italy"
+              gameMod={"against"}
+            />
+            <Card
+              title="PORTUGAL"
+              imageUrl={palacio_de_la_pena}
+              imageAlt="Palacio de la Pena"
+              description="Continue with PORTUGAL"
+              countryName="portugal"
+              gameMod={"against"}
+            />
+            <Card
+              title="UNITED KINGDOM"
+              imageUrl={buckingham_palace}
+              imageAlt="Buckingham Palace"
+              description="Continue with UNITED KINGDOM"
+              countryName="uk"
+              gameMod={"against"}
+            />
+          </div>
+          <div className="flex  space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8">
+            <Card
+              title="JAPAN"
+              imageUrl={kiyomizu_dera_buddhist_temple}
+              imageAlt="Kiyomizu Dera Buddhist Temple"
+              description="Continue with JAPAN"
+              countryName="japan"
+              gameMod={"against"}
+            />
+            <Card
+              title="NETHERLANDS"
+              imageUrl={windmill_netherlands}
+              imageAlt="windmill Netherlands"
+              description="Continue with NETHERLANDS"
+              countryName="netherlands"
+              gameMod={"against"}
+            />
+            <Card
+              title="WORLD"
+              imageUrl={earth}
+              imageAlt="Earth"
+              description="Continue with WORLD"
+              countryName="world"
+              gameMod={"against"}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
   else {
     document.title = "Page Is Not Available - Map Detective";
     return (

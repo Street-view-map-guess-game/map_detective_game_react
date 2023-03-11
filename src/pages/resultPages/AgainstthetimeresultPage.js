@@ -1,10 +1,10 @@
 import React from "react";
 import { Polyline } from "react-leaflet";
 
-import { calculateTotalScore,increaseNumberOfRounds,restartGame,startthegametime } from "../../Redux/MapGameSlices/gameSlice";
+import { calculateTotalScore, increaseNumberOfRounds, restartGame, startthegametime } from "../../Redux/MapGameSlices/gameSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { openCloseResultPage,restartCoordinate } from "../../Redux/MapGameSlices/mapSlice";
+import { openCloseResultPage, restartCoordinate } from "../../Redux/MapGameSlices/mapSlice";
 import { useState, useEffect } from "react";
 import styles from "../../styles/mapStyle.module.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -22,9 +22,9 @@ function AgainstResultPage({ score, guess, sonuc }) {
   const data = useSelector((state) => state.mapSlc.coordinate);
   const [isGameOver, setIsGameOver] = useState(false);
   const isshow = useSelector((state) => state.gmSlc.gamestarttime);
-  const [time,settime] =useState(10)
-  
-  
+  const [time, settime] = useState(10)
+
+
 
   const icon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
@@ -55,16 +55,16 @@ function AgainstResultPage({ score, guess, sonuc }) {
   }
 
   const generateNewCoordinate = () => {
-    
-    if(sonuc === 0){
+
+    if (sonuc === 0) {
       // sokak görünümünü yenile
-    dispatch(restartCoordinate());
-    //Total score
-    dispatch(calculateTotalScore(score));
-    // tahmin verilerini sıfırla
-    dispatch(increaseNumberOfRounds());
-    //sonuç sayfasını kapat
-    dispatch(openCloseResultPage());
+      dispatch(restartCoordinate());
+      //Total score
+      dispatch(calculateTotalScore(score));
+      // tahmin verilerini sıfırla
+      dispatch(increaseNumberOfRounds());
+      //sonuç sayfasını kapat
+      dispatch(openCloseResultPage());
 
     }
   };
@@ -74,21 +74,21 @@ function AgainstResultPage({ score, guess, sonuc }) {
     navigate("/countryselection");
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const timer = setInterval(() => {
 
 
       sayac()
 
-      if (time === 0){
+      if (time === 0) {
         generateNewCoordinate()
       }
-      
+
     }, 1000);
     return () => clearInterval(timer)
   })
 
- 
+
 
   const pathOptions = {
     color: "black",
@@ -110,8 +110,8 @@ function AgainstResultPage({ score, guess, sonuc }) {
         fontSize: 80,
       }}>
       <div className="-mt-24 sm:mt-0 text-center">
-        
-        {guess != 0  ? (<> <MapContainer
+
+        {guess != 0 ? (<> <MapContainer
           className={"w-148 h-122 sm:w-screen sm:h-64 rounded "}
           center={center}
           zoom={2}
@@ -140,45 +140,45 @@ function AgainstResultPage({ score, guess, sonuc }) {
           <Marker position={data} icon={realCoorMarker}>
             <Popup>Real Coordinate</Popup>
           </Marker>
-        </MapContainer></>):(<><h1 className="mapStyle_counterVal__vw7ds" style={{}}>!</h1><h1 className="mapStyle_counterVal__vw7ds" style={{marginBottom:"4rem",fontSize:"4rem"}}>please pick the map </h1></>)}
+        </MapContainer></>) : (<><h1 className="mapStyle_counterVal__vw7ds" style={{}}>!</h1><h1 className="mapStyle_counterVal__vw7ds" style={{ marginBottom: "4rem", fontSize: "4rem" }}>please pick the map </h1></>)}
         <div className="scores mt-2 flex justify-between basis-2/5 text-white text-2xl">
-           <><div className="roundScore">
+          <><div className="roundScore">
             Round Score: <Counter end={score}></Counter>{" "}
           </div>
-          <div className="totalScore">
-            Total Score:{" "}
-            <Counter start={totalScore} end={totalScore + score}></Counter>
-          </div></>
+            <div className="totalScore">
+              Total Score:{" "}
+              <Counter start={totalScore} end={totalScore + score}></Counter>
+            </div></>
         </div>
       </div>
 
-     {sonuc !== 0 ? (<div>
-      
-      
-      <h1 className="mapStyle_counterVal__vw7ds">
-        game over !
+      {sonuc !== 0 ? (<div>
+
+
+        <h1 className="mapStyle_counterVal__vw7ds">
+          game over !
         </h1>
-        
+
         <div className="text-center">
-        <button className="   relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-yellow-300 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50"  onClick={()=>{
-          navigate("/gamemodpage");
-        }}>
-       <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-                                    <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-                                        <svg className="w-5 h-5" fill="none" stroke="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                    </span>
-                                    <span className="relative">go to menu</span>
-    
-   
+          <button className="   relative inline-flex items-center px-12 py-3 overflow-hidden text-lg font-medium text-yellow-300 border-2 border-yellow-300 rounded-full hover:text-black group hover:bg-gray-50" onClick={() => {
+            navigate("/gamemodpage");
+          }}>
+            <span className="absolute left-0 block w-full h-0 transition-all bg-yellow-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+            <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+              <svg className="w-5 h-5" fill="none" stroke="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </span>
+            <span className="relative">go to menu</span>
 
-        </button>
+
+
+          </button>
         </div>
-        
-        
-        
-        </div>):(<div> <h1 className="mapStyle_counterVal__vw7ds">{time}</h1></div>)}
 
-     
+
+
+      </div>) : (<div> <h1 className="mapStyle_counterVal__vw7ds">{time}</h1></div>)}
+
+
     </div>
   );
 }

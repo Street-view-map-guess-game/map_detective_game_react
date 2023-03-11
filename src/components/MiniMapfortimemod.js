@@ -27,7 +27,7 @@ function Maptime() {
   const [guess, setGuess] = useState({ lat: "", lng: "" });
   const [result, setResultPage] = useState(false);
   const [roundScore, setroundScore] = useState(0.0);
-  const dispatch =useDispatch()
+  const dispatch = useDispatch()
 
 
 
@@ -53,8 +53,8 @@ function Maptime() {
       dispatch(againsttimeguess(guess))
       setResultPage(true);
       const audio = new Audio(pickingvoice);
-    audio.play();
-      
+      audio.play();
+
     }
   };
 
@@ -72,7 +72,7 @@ function Maptime() {
     useMapEvents({
       click: (e) => {
         setGuess(e.latlng);
-      
+
         console.log(guess);
       },
     });
@@ -82,7 +82,7 @@ function Maptime() {
   const isMobile = useMediaQuery({ maxWidth: 700 });
   const [mobileMapButton, setmobileMapButton] = useState(false);
 
-  return  (
+  return (
     isMobile ? (
       //telefon ise 
       <>
