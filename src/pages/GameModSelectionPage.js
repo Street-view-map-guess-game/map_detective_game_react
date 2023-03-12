@@ -25,7 +25,7 @@ function GameModeSelectionPage() {
                         gameMod="distancemod"
                     />
                     <Card
-                        title="Against Mod"
+                        title="Against the time Mod"
                         imageUrl={timemod}
                         imageAlt="distancemodimage"
                         description="Continue with Against the time Mod"
