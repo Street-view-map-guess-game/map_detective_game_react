@@ -30,9 +30,9 @@ export const AuthContextProvider = ({ children }) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     // The email of the user's account used.
-    const email = error.customData.email;
+    console.log(errorMessage)
     // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
+    
     // ...
   });
   };

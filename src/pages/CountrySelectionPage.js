@@ -22,7 +22,16 @@ function CountrySelectionPage() {
         <Header></Header>
         <div className="flex space-y-6 flex-col sm:space-x-0 sm:space-y-8 sm:pt-8 sm:pb-8 mt-32 mb-24 ">
           <div className="flex space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8 ">
-            <Card
+          <Card
+              title="WORLD"
+              imageUrl={earth}
+              imageAlt="Earth"
+              description="Continue with WORLD"
+              countryName="world"
+              gameMod={"distancemod"}
+            />
+             
+             <Card
               title="TURKEY"
               imageUrl={maiden_tower}
               imageAlt="Maiden's Tower"
@@ -38,14 +47,8 @@ function CountrySelectionPage() {
               countryName="france"
               gameMod={"distancemod"}
             />
-            <Card
-              title="SPAIN"
-              imageUrl={la_sagrada_familia}
-              imageAlt="La Sagrada Familia"
-              description="Continue with SPAIN"
-              countryName="spain"
-              gameMod={"distancemod"}
-            />
+            
+           
           </div>
           <div className="flex  space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8">
             <Card
@@ -91,13 +94,14 @@ function CountrySelectionPage() {
               gameMod={"distancemod"}
             />
             <Card
-              title="WORLD"
-              imageUrl={earth}
-              imageAlt="Earth"
-              description="Continue with WORLD"
-              countryName="world"
+              title="SPAIN"
+              imageUrl={la_sagrada_familia}
+              imageAlt="La Sagrada Familia"
+              description="Continue with SPAIN"
+              countryName="spain"
               gameMod={"distancemod"}
             />
+           
           </div>
         </div>
       </div>
@@ -128,6 +132,15 @@ function CountrySelectionPage() {
         <Header></Header>
         <div className="flex space-y-6 flex-col sm:space-x-0 sm:space-y-8 sm:pt-8 sm:pb-8 mt-32 mb-24 ">
           <div className="flex space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8 ">
+          <Card
+              title="WORLD"
+              imageUrl={earth}
+              imageAlt="Earth"
+              description="Continue with WORLD"
+              countryName="world"
+              gameMod={"against"}
+            /> 
+            
             <Card
               title="TURKEY"
               imageUrl={maiden_tower}
@@ -144,14 +157,9 @@ function CountrySelectionPage() {
               countryName="france"
               gameMod={"against"}
             />
-            <Card
-              title="SPAIN"
-              imageUrl={la_sagrada_familia}
-              imageAlt="La Sagrada Familia"
-              description="Continue with SPAIN"
-              countryName="spain"
-              gameMod={"against"}
-            />
+            
+          
+           
           </div>
           <div className="flex  space-x-6 flex-row sm:flex-col sm:space-x-0 sm:space-y-8">
             <Card
@@ -196,14 +204,15 @@ function CountrySelectionPage() {
               countryName="netherlands"
               gameMod={"against"}
             />
-            <Card
-              title="WORLD"
-              imageUrl={earth}
-              imageAlt="Earth"
-              description="Continue with WORLD"
-              countryName="world"
+              <Card
+              title="SPAIN"
+              imageUrl={la_sagrada_familia}
+              imageAlt="La Sagrada Familia"
+              description="Continue with SPAIN"
+              countryName="spain"
               gameMod={"against"}
             />
+            
           </div>
         </div>
       </div>
