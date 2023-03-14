@@ -16,7 +16,7 @@ function Header() {
 
   return (
     <div className="navbar bg-black h-20  top-0 z-10 fixed ">
-      <a href="#" className="px-28 sm:px-0 btn btn-ghost normal-case text-xl">
+     <Link to={"/gamemodpage"}> 
         <div className="w-24 flex">
           <img
             className="absolute top-5 left-5 opacity-80"
@@ -24,7 +24,7 @@ function Header() {
             src={whiteLogo}
             alt="logo"></img>
         </div>
-      </a>
+      </Link>
       <div className="right-10 absolute">
         <button
           className="bg-transparent hover:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 text-white font-bold py-2 px-4 rounded border border-white"

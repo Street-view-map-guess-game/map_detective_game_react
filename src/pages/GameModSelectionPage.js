@@ -3,8 +3,16 @@ import Header from "../components/Header";
 import whichcountrymod from "../assets/images/pageImage/gamemodeimages/countryselectionmode.png";
 import distancemod from "../assets/images/pageImage/gamemodeimages/distancemode.png";
 import timemod from "../assets/images/pageImage/gamemodeimages/fortimemod.png";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { zerotototalscore } from "../Redux/MapGameSlices/gameSlice";
 function GameModeSelectionPage() {
+    const dispatch = useDispatch()
+
+
+    useEffect(()=>{
+dispatch(zerotototalscore())
+    },[])
     return (
         <div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex  justify-center items-center">
             <Header></Header>

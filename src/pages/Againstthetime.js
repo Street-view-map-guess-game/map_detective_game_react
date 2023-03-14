@@ -45,7 +45,7 @@ export default function Againstthetime() {
         dispatch(againsttimeguess(0))
         setround(round + 1)
       }
-      if (round === 5) {
+      if (round === 4) {
         setsonuc(1)
       }
       if (isshow === true) {
@@ -58,7 +58,7 @@ export default function Againstthetime() {
           dispatch(startthegametime())
           setshowresult(false)
           console.log(score, guess)
-          if (round === 5) {
+          if (round === 4) {
             settimer3(-1)
           } else {
             settimer3(10)
