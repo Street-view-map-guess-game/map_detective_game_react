@@ -146,6 +146,9 @@ function StreetView({ countryName }) {
   );
 }
 
-export default GoogleApiWrapper({
-  apiKey,
-})(StreetView);
+export default React.memo(GoogleApiWrapper({ apiKey })(StreetView), 
+  (prevProps, nextProps) => {
+    return prevProps.refresh === nextProps.refresh &&
+           prevProps.countryName === nextProps.countryName;
+  }
+);

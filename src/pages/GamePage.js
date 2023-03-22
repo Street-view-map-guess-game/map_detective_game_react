@@ -1,12 +1,19 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, lazy, Suspense } from "react";
 
-import StreetView from "../components/StreetView";
-import Map from "../components/minimaps/MiniMap";
 import { useParams } from "react-router-dom";
 import allcoordinates from "../allCoordinates/coordinates.json";
 import FailPages from "../pages/PageIsNotAvailable.js"
 import MinimapCountrySelection from "../components/minimaps/MinimapforCountrySelec"
-import Againstthetime from "./Againstthetime";
+import Loadingpage from "./LoadingPage";
+// import StreetView from "../components/StreetView";
+// import Map from "../components/minimaps/MiniMap";
+// import Againstthetime from "./Againstthetime";
+
+
+const Againstthetime = lazy(() => import('./Againstthetime'));//sadece gerekli olduğunda yükler lazy tanımlama
+const StreetView = lazy(() => import('../components/StreetView'));
+const Map = lazy(() => import('../components/minimaps/MiniMap'));
+
 
 function GamePage() {
   const { countryName } = useParams();
@@ -40,8 +47,10 @@ function GamePage() {
         document.title = countryName.toUpperCase() + " - Which Country Mod - Map Detective";
         return (
           <div>
-            <MinimapCountrySelection></MinimapCountrySelection>
-            <StreetView countryName={countryName} />
+            <Suspense fallback={<Loadingpage />}>
+              <MinimapCountrySelection></MinimapCountrySelection>
+              <StreetView countryName={countryName} />
+            </Suspense>
           </div>
         );
       }
@@ -56,8 +65,10 @@ function GamePage() {
       document.title = countryName.toUpperCase() + " - Distance Mod - Map Detective";
       return (
         <div>
-          <Map></Map>
-          <StreetView countryName={countryName} />
+          <Suspense fallback={<Loadingpage />}>
+            <Map></Map>
+            <StreetView countryName={countryName} />
+          </Suspense>
         </div>
       );
     }
@@ -65,7 +76,9 @@ function GamePage() {
       document.title = countryName.toUpperCase() + " - Against Mod - Map Detective";
       return (
         <div>
-          <Againstthetime></Againstthetime>
+          <Suspense fallback={<Loadingpage />}>
+            <Againstthetime></Againstthetime>
+          </Suspense>
         </div>
       )
     }
