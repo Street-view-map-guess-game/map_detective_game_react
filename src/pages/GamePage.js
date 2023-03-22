@@ -64,7 +64,9 @@ function GamePage() {
     else if (gameMod === "against") {
       document.title = countryName.toUpperCase() + " - Against Mod - Map Detective";
       return (
-        <div> <Againstthetime></Againstthetime></div>
+        <div>
+          <Againstthetime></Againstthetime>
+        </div>
       )
     }
     else {

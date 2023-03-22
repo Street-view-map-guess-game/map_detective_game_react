@@ -31,6 +31,8 @@ function StreetView({ countryName }) {
     }
   }, [refresh, countryName]);
 
+  
+
   const refreshcordinate = () => {
     const data = getRandomCoordinate({ countryName });
     const sv = new window.google.maps.StreetViewService();
@@ -133,7 +135,8 @@ function StreetView({ countryName }) {
           height: "100%",
           width: "100%",
           filter: "invert(1)",
-        }}></div>
+        }}>
+      </div>
       {streetViewIsLoaded ? (
         <Compass panorama={newPanorama} />
       ) : (

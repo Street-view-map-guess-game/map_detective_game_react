@@ -10,9 +10,9 @@ function GameModeSelectionPage() {
     const dispatch = useDispatch()
 
 
-    useEffect(()=>{
-dispatch(zerotototalscore())
-    },[])
+    useEffect(() => {
+        dispatch(zerotototalscore())
+    }, [])
     return (
         <div className="bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-red-500 via-sky-800 to-red-900 min-h-screen flex  justify-center items-center">
             <Header></Header>
