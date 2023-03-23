@@ -54,10 +54,8 @@ export default function Againstthetime() {
           alarmAudio.play();
         }
         if (timer2 === 0) {
-          console.log('see you later')
           dispatch(startthegametime())
           setshowresult(false)
-          console.log(score, guess)
           if (round === 4) {
             settimer3(-1)
           } else {
@@ -73,7 +71,7 @@ export default function Againstthetime() {
   // kullanıcı girdi girince zamanlayıcıyı sıfırlar
   useEffect(() => {
     timer2 = 0;
-  }, [guess])
+  }, [((guess) && (guess != 0))])
 
 
   const addtime = () => {
