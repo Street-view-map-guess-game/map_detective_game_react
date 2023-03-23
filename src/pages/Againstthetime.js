@@ -70,8 +70,10 @@ export default function Againstthetime() {
 
   // kullanıcı girdi girince zamanlayıcıyı sıfırlar
   useEffect(() => {
-    timer2 = 0;
-  }, [((guess) && (guess != 0))])
+    if (guess !== 0) {
+      timer2 = 0;
+    }
+  }, [(guess)])
 
 
   const addtime = () => {
