@@ -31,7 +31,7 @@ function StreetView({ countryName }) {
     }
   }, [refresh, countryName]);
 
-  
+
 
   const refreshcordinate = () => {
     const data = getRandomCoordinate({ countryName });
@@ -124,6 +124,13 @@ function StreetView({ countryName }) {
     }
   };
 
+  // var isChrome = /Chrome/.test(navigator.userAgent);
+  // var isEdge = /Edg/.test(navigator.userAgent);
+  // var isOpera = /OPR/.test(navigator.userAgent);
+
+  // const invertFilter = (isChrome || isEdge || isOpera) ? "invert(1)" : "";
+  // console.log(navigator.userAgent);
+
   return (
     <>
       <div
@@ -146,9 +153,9 @@ function StreetView({ countryName }) {
   );
 }
 
-export default React.memo(GoogleApiWrapper({ apiKey })(StreetView), 
+export default React.memo(GoogleApiWrapper({ apiKey })(StreetView),
   (prevProps, nextProps) => {
     return prevProps.refresh === nextProps.refresh &&
-           prevProps.countryName === nextProps.countryName;
+      prevProps.countryName === nextProps.countryName;
   }
 );

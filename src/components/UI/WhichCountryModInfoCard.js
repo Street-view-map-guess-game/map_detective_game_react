@@ -4,7 +4,7 @@ import styles from "../../styles/mapStyle.module.css";
 
 function InfoCard({ countryName, trueGuessNumber, remaingGuessNumber }) {
     return (
-        <div className="flex justify-start ml-6 mt-10 text-white text-2xl">
+        <div className="flex justify-start ml-2 mt-2 text-white text-2xl">
             <div
                 className="flex bg-gradient-to-br from-red-500 via-sky-800 to-red-900 space-x-10 shadow-lg rounded-md border-2 border-white text-center"
                 style={{ zIndex: 9 }}>

@@ -72,7 +72,6 @@ function Map() {
     useMapEvents({
       click: (e) => {
         setGuess(e.latlng);
-        console.log(guess);
       },
     });
     return null;

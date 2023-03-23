@@ -96,7 +96,7 @@ function MinimapCountrySelection() {
   // mapte seçilen ülkenin doğru olup olmadığını kontrol eder
   const countryControl = () => {
     if (selectedCountryKey === null) {
-      alert("Lütfen tahmin yapın");
+      alert("PLEASE GUESS");
     }
     else {
       // ülke seçimi doğru ise

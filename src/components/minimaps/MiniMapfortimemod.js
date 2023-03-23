@@ -49,7 +49,7 @@ function Maptime() {
 
   const calculateDistanceNScore = () => {
     if (guess.lat === "" || guess.lng === "") {
-      alert("Lütfen tahmin yapın");
+      alert("PLEASE GUESS");
     } else {
       const distance = findDistance(data, guess);
       const score = parseFloat(setScore(distance));
