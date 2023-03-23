@@ -101,7 +101,6 @@ function MinimapCountrySelection() {
     else {
       // ülke seçimi doğru ise
       if (selectedCountryKey === realCountryKey) {
-        console.log("True,Congratulations")
         setSelectedCountryColor({
           fillColor: 'green',
           fillOpacity: 0.5,
@@ -114,7 +113,6 @@ function MinimapCountrySelection() {
       }
       // ülke seçimi hatalı ise
       else {
-        console.log("False,Please try again")
         // kalan tahmin hakkı
         setRemaingGuessNumber(remaingGuessNumber - 1)
         // yanlış bilinen ülkeleri arraye alıyor

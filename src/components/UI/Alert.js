@@ -18,7 +18,6 @@ const Alert = ({ type, title, message }) => {
         borderColor = "border-yellow-600";
         textColor = "text-gray-800";
     }
-    console.log(type, title, message)
     return (
         <div id='Alert' className="flex justify-center items-center h-screen" style={{ zIndex: 20 }}>
             <div className={`border p-4 rounded-lg ${backgroundColor} ${borderColor}`}>

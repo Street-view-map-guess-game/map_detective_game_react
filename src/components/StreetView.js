@@ -129,7 +129,6 @@ function StreetView({ countryName }) {
   // var isOpera = /OPR/.test(navigator.userAgent);
 
   // const invertFilter = (isChrome || isEdge || isOpera) ? "invert(1)" : "";
-  // console.log(navigator.userAgent);
 
   return (
     <>
