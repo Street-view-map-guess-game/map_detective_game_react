@@ -2,15 +2,14 @@ import React from 'react'
 import { UserAuth } from '../context/AuthContext';
 import { Navigate, Link } from 'react-router-dom';
 import Loadingpage from './LoadingPage';
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import yazilogo from "../assets/images/pageImage/mapdetectiveyazilogo-beyaz.png"
 import whereami from "../assets/images/pageImage/neredymyazili2.png"
 import { useMediaQuery } from 'react-responsive'
-// import Particles from 'react-particles';
+import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
 import { useCallback } from 'react';
 
-const Particles = lazy(() => import('react-particles'));
 
 
 export default function FirstPage() {
@@ -45,7 +44,7 @@ export default function FirstPage() {
         !time ? (<Loadingpage></Loadingpage>) : (
             user ? (<Navigate to='/gamemodpage' />) : (
                 <>
-                    <Suspense fallback={<Loadingpage />}>
+
                     <Particles
                         id="tsparticles"
                         init={particlesInit}
@@ -123,8 +122,6 @@ export default function FirstPage() {
                             detectRetina: true,
                         }}
                     />
-                    </Suspense>
-
                     <div className="relative  min-h-screen flex justify-center items-center ">
                         {/* connect to account */}
                         {isDesktopOrLaptop && <div >
